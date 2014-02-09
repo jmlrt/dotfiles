@@ -1,4 +1,6 @@
-DOTFILES
+dotfiles
 ========
 
-This is the place for my dotfiles and config files
+My personal dotfiles and config files
+
+Feel free to use it...
