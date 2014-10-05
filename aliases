@@ -1,0 +1,4 @@
+# Replay command with sudo
+alias fuck='sudo $( fc -ln -1)'
+# Upgrade for Debian (checkrestart require debian-goodies package)
+alias upg='sudo apt-get update && sudo apt-get upgrade -y && sudo checkrestart'
