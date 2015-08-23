@@ -14,6 +14,7 @@ set wrap		" Affiche les lignes trop longues sur plusieurs
 			" lignes
 set scrolloff=3		" Affiche un minimum de 3 lignes autour du curseur
 			" (pour le scroll)
+set ts=2		
 
 " -- Recherche
 set ignorecase		" Ignore la casse lors d'une recherche

@@ -1,0 +1,22 @@
+# Replay command with sudo
+alias fuck='sudo $(  fc -ln -1)'
+# Fix unix rights on directories and files
+alias fix_chmod="find . -type f -exec chmod 640 {} \; && find . -type d -exec chmod 750 {} \;"
+# Start Docker Machine VM
+alias docker_start='docker-machine start default && eval $(docker-machine env default)'
+# Backup laptop using backdup.rake
+alias backup='rake -f ~/u/dev/scripts/backdup.rake backupall'
+alias backdup='rake -f ~/u/dev/scripts/backdup.rake'
+# Upgrade for Debian (checkrestart require debian-goodies package)
+alias upg='sudo apt-get update && sudo apt-get upgrade -y && sudo checkrestart'
+# Fix Tunnelblick + OpenVPN bug
+alias fix_tunnel='sudo kextunload -b net.sf.tuntaposx.tap; sudo kextunload -b net.sf.tuntaposx.tun'
+# List EC2 instances with status
+alias lsec2='aws ec2 describe-instances --output table --query "Reservations[].Instances[].[Tags[?Key==\`Name\`] | [0].Value, State.Name, Instances.Id]"'
+# Git Aliases
+alias gst='git status -sb'
+alias gpl='git pull'
+alias gps='git push'
+alias glog='git log'
+alias gcmt='git commit -a -m'
+
