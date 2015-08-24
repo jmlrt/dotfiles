@@ -16,7 +16,8 @@ alias upg='sudo apt-get update && sudo apt-get upgrade -y && sudo checkrestart'
 # Fix Tunnelblick + OpenVPN bug
 alias fix_tunnel='sudo kextunload -b net.sf.tuntaposx.tap; sudo kextunload -b net.sf.tuntaposx.tun'
 # List EC2 instances with status
-alias lsec2='aws ec2 describe-instances --output table --query "Reservations[].Instances[].[Tags[?Key==\`Name\`] | [0].Value, State.Name, Instances.Id]"'
+alias ls_ec2_status='aws ec2 describe-instances --output table --query "Reservations[].Instances[].[Tags[?Key==\`Name\`] | [0].Value, State.Name]"'
+alias ls_ec2="aws ec2 describe-instances | jq -r '.Reservations[].Instances[]|.InstanceId + \" \" + (.Tags[]|select(.[\"Key\"] == \"Name\")|.Value)'"
 # Git Aliases
 alias gst='git status -sb'
 alias gpl='git pull'
