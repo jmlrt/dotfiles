@@ -79,10 +79,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Chef environment
-eval "$(chef shell-init zsh)"
-# Docker environment
-eval "$(docker-machine env default)"
 # Opam environment
 . ~/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 

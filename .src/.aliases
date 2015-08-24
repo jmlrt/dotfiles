@@ -2,6 +2,8 @@
 alias fuck='sudo $(  fc -ln -1)'
 # Fix unix rights on directories and files
 alias fix_chmod="find . -type f -exec chmod 640 {} \; && find . -type d -exec chmod 750 {} \;"
+# Source Chef environment
+eval "$(chef shell-init zsh)"
 # Start Docker Machine VM
 alias docker_start='docker-machine start default && eval $(docker-machine env default)'
 # Backup laptop using backdup.rake
