@@ -78,3 +78,6 @@ let g:neocomplcache_enable_at_startup = 1
 :inoremap { {<CR>}<Up><End>
 :inoremap [ []<Left>
 :inoremap ( ()<Left> 
+
+" Use NERDTree (tree at the left of vim)
+map <C-n> :NERDTreeToggle<CR>
