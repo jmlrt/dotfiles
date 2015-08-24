@@ -4,6 +4,8 @@ alias fuck='sudo $(fc -ln -1)'
 alias fix_chmod='find . -type f -exec chmod 640 {} \; && find . -type d -exec chmod 750 {} \;'
 # Chef environment
 alias env_chef='eval $(chef shell-init zsh)'
+# Work environment
+alias env_wed='. ~/u/wed/config/env.sh'
 # Docker local
 alias docker_local='docker-machine start default && eval $(docker-machine env default)'
 # Backup laptop using backdup.rake
