@@ -21,6 +21,11 @@ alias gpl='git pull'
 alias gps='git push'
 alias glog='git log'
 alias gcmt='git commit -a -m'
+# Dir Aliases
+DEV_HOME="~/u/dev"
+alias dev="cd ${DEV_HOME}"
+DOC_HOME="~/u/doc"
+alias doc="cd ${DOC_HOME}"
 
 # Convert Markdown to HTML
 function md2html() {
