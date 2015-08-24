@@ -20,3 +20,9 @@ alias gps='git push'
 alias glog='git log'
 alias gcmt='git commit -a -m'
 
+# Convert Markdown to HTML
+function md2html() {
+	md_file=$1
+	html_file="${md_file%.md}.html"
+	pandoc -f markdown -t html -o ${html_file} ${md_file}
+}
