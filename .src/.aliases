@@ -1,11 +1,11 @@
 # Replay command with sudo
-alias fuck='sudo $(  fc -ln -1)'
+alias fuck='sudo $(fc -ln -1)'
 # Fix unix rights on directories and files
-alias fix_chmod="find . -type f -exec chmod 640 {} \; && find . -type d -exec chmod 750 {} \;"
-# Source Chef environment
-eval "$(chef shell-init zsh)"
-# Start Docker Machine VM
-alias docker_start='docker-machine start default && eval $(docker-machine env default)'
+alias fix_chmod='find . -type f -exec chmod 640 {} \; && find . -type d -exec chmod 750 {} \;'
+# Chef environment
+alias env_chef='eval $(chef shell-init zsh)'
+# Docker local
+alias docker_local='docker-machine start default && eval $(docker-machine env default)'
 # Backup laptop using backdup.rake
 alias backup='rake -f ~/u/dev/scripts/backdup.rake backupall'
 alias backdup='rake -f ~/u/dev/scripts/backdup.rake'
