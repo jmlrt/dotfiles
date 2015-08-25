@@ -19,6 +19,7 @@ alias fix_tunnel='sudo kextunload -b net.sf.tuntaposx.tap; sudo kextunload -b ne
 alias ls_ec2_status='aws ec2 describe-instances --output table --query "Reservations[].Instances[].[Tags[?Key==\`Name\`] | [0].Value, State.Name]"'
 alias ls_ec2="aws ec2 describe-instances | jq -r '.Reservations[].Instances[]|.InstanceId + \" \" + (.Tags[]|select(.[\"Key\"] == \"Name\")|.Value)'"
 # Git Aliases
+alias git='hub'
 alias gst='git status -sb'
 alias gpl='git pull'
 alias gps='git push'
