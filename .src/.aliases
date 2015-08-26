@@ -30,6 +30,9 @@ DEV_HOME="~/u/dev"
 alias dev="cd ${DEV_HOME}"
 DOC_HOME="~/u/doc"
 alias doc="cd ${DOC_HOME}"
+# Docker Aliases
+docker_clean='docker ps -a --filter 'status=exited' --format "{{.ID}}" | xargs docker rm'
+docker_clean_images='docker images --quiet | xargs docker rmi'
 
 # Convert Markdown to HTML
 function md2html() {
