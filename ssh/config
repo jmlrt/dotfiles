@@ -1,0 +1,13 @@
+Host *
+  User jmlrt
+  IdentityFile ~/.ssh/id_rsa
+  AddKeysToAgent yes
+  ForwardAgent yes
+  UseKeychain yes
+  StrictHostKeyChecking no
+  ServerAliveInterval 20
+  ServerAliveCountMax 180
+  TCPKeepAlive yes
+  ControlMaster auto
+  ControlPath ~/.ssh/sockets/%r@%h-%p
+  ControlPersist 600
