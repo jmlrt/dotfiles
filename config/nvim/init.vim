@@ -80,16 +80,52 @@ map <S-x> :set number!<CR>
 " treesitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
-  -- Install languages synchronously (only applied to `ensure_installed`)
+  -- A list of parser names, or "all"
+  ensure_installed = {
+    "bash",
+    "c",
+    "clojure",
+    "comment",
+    "css",
+    "dockerfile",
+    "go",
+    "hcl",
+    "html",
+    "java",
+    "javascript",
+    "json",
+    "kotlin",
+    "lua",
+    "make",
+    "markdown",
+    "perl",
+    "php",
+    "python",
+    "regex",
+    "rst",
+    "ruby",
+    "rust",
+    "scala",
+    "sql",
+    "toml",
+    "typescript",
+    "vim",
+    "yaml",
+  },
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
-  -- List of parsers to ignore installing
-  ignore_install = {},
+
+  -- Automatically install missing parsers when entering buffer
+  auto_install = true,
+
   highlight = {
     -- `false` will disable the whole extension
     enable = true,
+
     -- list of language that will be disabled
     disable = {},
+
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
