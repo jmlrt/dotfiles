@@ -13,7 +13,8 @@
 [fetch]
   prune = true
 [alias]
-  br = branch
+  br = branch --sort=-committerdate
+  brv = branch -vv --sort=-committerdate
   ci = commit --verbose
   ca = commit --all
   co = checkout
@@ -23,7 +24,7 @@
   pl = pull --rebase
   pr = "!f() { git fetch origin pull/$1/head:pr/$1; }; f"
   sa = stash
-  st = status
+  st = status -sb
   unstage = reset -q HEAD --
   discard = checkout --
   uncommit = reset --mixed HEAD~

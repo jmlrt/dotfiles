@@ -1,7 +1,7 @@
 python 3.9.10 3.10.3
 gcloud 403.0.0
 helm 3.10.0
-kubectl 1.21.6
+kubectl 1.22.12
 kubectx 0.9.4
 minikube 1.27.0
 kind 0.16.0

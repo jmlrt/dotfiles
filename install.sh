@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DOTFILES_HOME=$(cd $(dirname "$0") && pwd)
+DOTFILES_HOME=$(cd "$(dirname "$0")" && pwd)
 
 function symlink() {
     src=$DOTFILES_HOME/$1
@@ -14,6 +14,7 @@ symlink config/gh/config.yml ~/.config/gh/config.yml
 symlink config/jrnl/jrnl.yaml ~/.config/jrnl/jrnl.yaml
 symlink config/nvim/init.vim ~/.config/nvim/init.vim
 symlink default-python-packages ~/.default-python-packages
+symlink default-cloud-sdk-components ~/.default-cloud-sdk-components
 symlink docker/daemon.json ~/.docker/daemon.json
 symlink gitconfig ~/.gitconfig
 symlink gitignore_global ~/.gitignore_global
