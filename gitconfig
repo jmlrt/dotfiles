@@ -20,6 +20,7 @@
   co = checkout
   cp = cherry-pick
   df = diff
+  dmb = "!git branch --merged | grep -v \"^\\*\" | grep -v \"^\\+\" | grep -v '^  master$' | grep -v '^  develop$' | xargs -n 1 git branch -d"
   lg = log --graph --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ar)%Creset'
   pl = pull --rebase
   pr = "!f() { git fetch origin pull/$1/head:pr/$1; }; f"

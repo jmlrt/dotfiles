@@ -53,7 +53,7 @@ au BufNewFile,BufRead *.py
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
-    \ set textwidth=79 |
+    \ set textwidth=119 |
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix|
@@ -72,7 +72,9 @@ au BufNewFile,BufRead *.py
 "map <ScrollWheelRight> <nop>
 "map <S-ScrollWheelRight> <nop>
 "map <C-ScrollWheelRight> <nop>
-set mouse-=a "https://gist.github.com/u0d7i/01f78999feff1e2a8361
+"set mouse-=a "https://gist.github.com/u0d7i/01f78999feff1e2a8361
+" https://vi.stackexchange.com/questions/13566/fully-disable-mouse-in-console-vim
+set mouse=
 
 map <S-w> :set wrap!<CR>
 map <S-x> :set number!<CR>

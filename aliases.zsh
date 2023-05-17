@@ -81,7 +81,7 @@ alias krmp="kubectl delete pod"
 alias cloudshell='gcloud cloud-shell ssh'
 alias d="docker"
 alias pip_upgrade="pip list --local --outdated --format freeze | cut -d= -f1 | xargs pip install --upgrade"
-alias sed=gsed
+#alias sed=gsed
 alias spotify_track='osascript -e '\''tell application "Spotify" to artist of current track & " - " & name of current track'\'
 alias tre="trans en:fr"
 alias trf="trans fr:en"

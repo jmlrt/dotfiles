@@ -1,0 +1,13 @@
+session_name: elastic
+windows:
+  - window_name: perso
+  - window_name: elastic
+  - window_name: release-eng
+    shell_command_before:
+      - cd ~/git/elastic/release-eng
+  - window_name: unified-release
+    shell_command_before:
+      - cd ~/git/elastic/unified-release
+  - window_name: infra
+    shell_command_before:
+      - cd ~/git/elastic/infra
