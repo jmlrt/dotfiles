@@ -2,16 +2,42 @@
   name = Julien Mailleret
   email = 8582351+jmlrt@users.noreply.github.com
   signingkey = 92CD4B00551DB751
+
+[commit]
+  gpgsign = true
+
+[core]
+  excludesfile = /Users/jmlrt/.gitignore_global
+  editor = nvim
+
 [credential]
   helper = cache
-[push]
-  default = upstream
-[pull]
-  rebase = true
-[rebase]
-  autosquash = true
+
+[diff]
+  colorMoved = default
+
 [fetch]
   prune = true
+
+[init]
+  defaultBranch = main
+
+[pager]
+  branch = false
+
+[pull]
+  rebase = true
+
+[push]
+  autoSetupRemote = true
+  default = upstream
+
+[rebase]
+  autosquash = true
+
+[tag]
+  gpgsign = true
+
 [alias]
   br = branch --sort=-committerdate
   brv = branch -vv --sort=-committerdate
@@ -51,16 +77,6 @@
   fedlog = !HASH=`git log --pretty=oneline | head -n 50 | fzf` && HASHZ=`echo ${HASH} | awk '{ print $1 }'` && FILES=`git show --pretty='format:' --name-only $HASHZ | grep -v -e '^$' | fzf -x -m` && nvim ${FILES}
   # fuzzy reset back to prior commit
   freset = !HASH=`git log --pretty=oneline | head -n 50 | fzf` && git reset --soft `echo ${HASH} | awk '{ print $1 }'`^
-[pager]
-  branch = false
-[core]
-  excludesfile = /Users/jmlrt/.gitignore_global
-  editor = nvim
-[diff]
-  colorMoved = default
-[commit]
-  gpgSign = true
-[tag]
-  gpgSign = true
-[init]
-  defaultBranch = main
+
+[url "git@github.com:"]
+  insteadOf = https://github.com/

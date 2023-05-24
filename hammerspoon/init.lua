@@ -114,4 +114,3 @@ hs.hotkey.bind({"cmd","alt","shift"}, "D", mouseHighlight)
 hs.urlevent.bind("someAlert", function(eventName, params)
                    hs.alert.show("Received someAlert")
 end)
-

@@ -41,7 +41,7 @@ if has("autocmd")
 endif
 
 " fzf
-set rtp+=/usr/local/opt/fzf
+set rtp+=/opt/homebrew/opt/fzf
 
 " folding
 set foldmethod=indent

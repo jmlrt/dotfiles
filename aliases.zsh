@@ -9,7 +9,7 @@ alias g="git"
 alias ga="git add"
 alias gd="git diff"
 alias gds="git diff --staged"
-alias gmp="git_main_pull"
+alias gmp="git_main_pull && git_cleanup_branches.sh"
 alias gst="git st"
 
 git_fetch_all() {
@@ -81,17 +81,12 @@ alias krmp="kubectl delete pod"
 alias cloudshell='gcloud cloud-shell ssh'
 alias d="docker"
 alias pip_upgrade="pip list --local --outdated --format freeze | cut -d= -f1 | xargs pip install --upgrade"
-#alias sed=gsed
 alias spotify_track='osascript -e '\''tell application "Spotify" to artist of current track & " - " & name of current track'\'
 alias tre="trans en:fr"
 alias trf="trans fr:en"
 alias vim=nvim
 alias week_number="date +'So this is week: %U of %Y'"
 alias yt=" youtube-dl"
-
-asdf_latest() {
-    asdf install "$1" latest && asdf global "$1" latest
-}
 
 mkcd() {
     mkdir -p -- "$1" && cd -P -- "$1"
@@ -124,8 +119,8 @@ tz() {
 
 update() {
     brew update && brew upgrade && brew upgrade --cask && brew cleanup
+    python3 -m pip install --upgrade pip
     pipx upgrade-all
-    tldr --update
 }
 
 # FZF Functions
@@ -189,6 +184,14 @@ git_pr_checkout() {
     if [ -n "$pr_number" ]; then
         gh pr checkout "$pr_number"
     fi
+}
+
+git_clean_squash_merge_branches_master() {
+  git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done
+}
+
+git_clean_squash_merge_branches_main() {
+  git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done
 }
 
 vault_totp() {

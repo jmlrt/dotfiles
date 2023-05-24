@@ -9,3 +9,4 @@
 ve/
 venv/
 credentials.json
+*.token
