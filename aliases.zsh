@@ -81,16 +81,11 @@ alias krmp="kubectl delete pod"
 alias cloudshell='gcloud cloud-shell ssh'
 alias d="docker"
 alias pip_upgrade="pip list --local --outdated --format freeze | cut -d= -f1 | xargs pip install --upgrade"
-#alias sed=gsed
 alias spotify_track='osascript -e '\''tell application "Spotify" to artist of current track & " - " & name of current track'\'
 alias tre="trans en:fr"
 alias trf="trans fr:en"
 alias vim=nvim
 alias week_number="date +'So this is week: %U of %Y'"
-
-asdf_latest() {
-    asdf install "$1" latest && asdf global "$1" latest
-}
 
 mkcd() {
     mkdir -p -- "$1" && cd -P -- "$1"
@@ -123,7 +118,6 @@ tz() {
 
 update() {
     brew update && brew upgrade && brew upgrade --cask && brew cleanup
-    asdf plugin update --all && for p in $(asdf plugin list | grep -v java | grep -v kubectl | grep -v python); do asdf_latest "$p"; done
     python3 -m pip install --upgrade pip
     pipx upgrade-all
     tldr --update
