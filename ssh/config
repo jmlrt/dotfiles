@@ -1,6 +1,5 @@
 Host *
   User jmlrt
-  IdentityFile ~/.ssh/id_rsa
   AddKeysToAgent yes
   ForwardAgent yes
   UseKeychain yes

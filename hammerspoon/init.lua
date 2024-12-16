@@ -1,28 +1,29 @@
--- Move window to the top/left
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "Y", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
+-- Reload Hammerspoon config
+hs.loadSpoon("ReloadConfiguration")
+spoon.ReloadConfiguration:start()
 
-  f.x = f.x - 10
-  f.y = f.y - 10
-  win:setFrame(f)
-end)
+-- Caffeine replacement
+hs.loadSpoon("Caffeine")
+spoon.Caffeine:start()
+
+-- Move windows
+hs.loadSpoon("WindowHalfsAndThirds")
+spoon.WindowHalfsAndThirds:bindHotkeys(spoon.WindowHalfsAndThirds.defaultHotkeys)
+
+-- Move windows to other screens
+hs.loadSpoon("WindowScreenLeftAndRight")
+spoon.WindowScreenLeftAndRight:bindHotkeys(spoon.WindowScreenLeftAndRight.defaultHotkeys)
+
+-- Pomodoro
+hs.loadSpoon("Cherry")
+
+-- CUSTOM --
 
 -- Move window to the top
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "K", function()
   local win = hs.window.focusedWindow()
   local f = win:frame()
 
-  f.y = f.y - 10
-  win:setFrame(f)
-end)
-
--- Move window to the top/right
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "U", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-
-  f.x = f.x + 10
   f.y = f.y - 10
   win:setFrame(f)
 end)
@@ -45,16 +46,6 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "L", function()
   win:setFrame(f)
 end)
 
--- Move window to the bottom/left
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "B", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-
-  f.x = f.x - 10
-  f.y = f.y + 10
-  win:setFrame(f)
-end)
-
 -- Move window to the bottom
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "J", function()
   local win = hs.window.focusedWindow()
@@ -63,40 +54,6 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "J", function()
   f.y = f.y + 10
   win:setFrame(f)
 end)
-
--- Move window to the bottom/right
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "N", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-
-  f.x = f.x + 10
-  f.y = f.y + 10
-  win:setFrame(f)
-end)
-
--- Reload Hammerspoon config
-hs.loadSpoon("ReloadConfiguration")
-spoon.ReloadConfiguration:start()
-
--- Caffeine replacement
-hs.loadSpoon("Caffeine")
-spoon.Caffeine:start()
-
--- Move windows
-hs.loadSpoon("WindowHalfsAndThirds")
-spoon.WindowHalfsAndThirds:bindHotkeys(spoon.WindowHalfsAndThirds.defaultHotkeys)
-
--- Send all Finder windows to front when calling finder
-function applicationWatcher(appName, eventType, appObject)
-  if (eventType == hs.application.watcher.activated) then
-    if (appName == "Finder") then
-      -- Bring all Finder windows forward when one gets activated
-      appObject:selectMenuItem({"Window", "Bring All to Front"})
-    end
-  end
-end
-appWatcher = hs.application.watcher.new(applicationWatcher)
-appWatcher:start()
 
 -- Mute when not connected to home Wifi
 wifiWatcher = nil
@@ -157,3 +114,4 @@ hs.hotkey.bind({"cmd","alt","shift"}, "D", mouseHighlight)
 hs.urlevent.bind("someAlert", function(eventName, params)
                    hs.alert.show("Received someAlert")
 end)
+

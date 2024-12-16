@@ -87,6 +87,7 @@ alias tre="trans en:fr"
 alias trf="trans fr:en"
 alias vim=nvim
 alias week_number="date +'So this is week: %U of %Y'"
+alias yt=" youtube-dl"
 
 asdf_latest() {
     asdf install "$1" latest && asdf global "$1" latest
@@ -123,8 +124,6 @@ tz() {
 
 update() {
     brew update && brew upgrade && brew upgrade --cask && brew cleanup
-    asdf plugin update --all && for p in $(asdf plugin list | grep -v java | grep -v kubectl | grep -v python); do asdf_latest "$p"; done
-    python3 -m pip install --upgrade pip
     pipx upgrade-all
     tldr --update
 }
