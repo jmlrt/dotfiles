@@ -35,7 +35,8 @@ export GPG_TTY
 
 # Pipx
 if command -v pipx > /dev/null; then
-  eval "$($HOMEBREW_PREFIX/Cellar/pipx/$(pipx --version)_1/libexec/bin/register-python-argcomplete pipx)"
+  autoload -U compinit && compinit
+  eval "$(register-python-argcomplete pipx)"
 fi
 
 # Vault
