@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 DOTFILES_HOME=$(cd "$(dirname "$0")" && pwd)
+SPOONS_HOME=~/.hammerspoon/Spoons
 
 function symlink() {
     src=$DOTFILES_HOME/$1
@@ -8,6 +9,15 @@ function symlink() {
     dst_dir=$(dirname $dst)
     mkdir -p $dst_dir
     ln -nsf "$src" "$dst" && echo "File $src linked to $dst"
+}
+
+function install_spoon() {
+    spoon=$1
+    mkdir -p $SPOONS_HOME
+    cd $SPOONS_HOME
+    wget https://github.com/Hammerspoon/Spoons/raw/master/Spoons/$spoon.spoon.zip
+    unzip $spoon.spoon.zip
+    rm $spoon.spoon.zip
 }
 
 symlink aliases.zsh ~/.aliases.zsh
@@ -22,3 +32,9 @@ symlink ssh/config ~/.ssh/config
 symlink tmux.conf ~/.tmux.conf
 symlink zprofile ~/.zprofile
 symlink zshrc ~/.zshrc
+
+install_spoon Caffeine
+install_spoon Cherry
+install_spoon ReloadConfiguration
+install_spoon WindowHalfsAndThirds
+install_spoon WindowScreenLeftAndRight
