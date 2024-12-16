@@ -2,8 +2,11 @@
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
+# Homebrew
+export HOMEBREW_PREFIX="/opt/homebrew"
+
 # Path
-export PATH="$PATH:$HOME/.local/bin:$HOME/bin"
+export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH:$HOME/.local/bin:$HOME/bin"
 
 # Editor
 if command -v nvim > /dev/null; then
