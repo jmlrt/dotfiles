@@ -119,7 +119,6 @@ tz() {
 
 update() {
     brew update && brew upgrade && brew upgrade --cask && brew cleanup
-    python3 -m pip install --upgrade pip
     pipx upgrade-all
 }
 
