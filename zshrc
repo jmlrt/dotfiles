@@ -3,7 +3,8 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # Homebrew
-export HOMEBREW_PREFIX="/opt/homebrew"
+#export HOMEBREW_PREFIX="/opt/homebrew"
+eval "$(brew shellenv)"
 
 # Path
 export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH:$HOME/.local/bin:$HOME/bin"
