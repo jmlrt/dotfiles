@@ -3,8 +3,13 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # Homebrew
-#export HOMEBREW_PREFIX="/opt/homebrew"
-eval "$(brew shellenv)"
+# This is required to ensure compatibility with both macOS Intel & macOS M1
+# because brew use different path on different archs
+if [ -f /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+  eval "$(brew shellenv)"
+fi
 
 # Path
 export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH:$HOME/.local/bin:$HOME/bin"
