@@ -1,7 +1,7 @@
 [user]
   name = Julien Mailleret
   email = 8582351+jmlrt@users.noreply.github.com
-  signingkey = 92CD4B00551DB751
+  # signingkey = <defined in local shell config>
 
 [commit]
   gpgsign = true
