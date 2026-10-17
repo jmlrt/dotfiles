@@ -1,0 +1,220 @@
+version: 1
+
+# Vault path (required) - where articles are stored
+vault: $HOME/Downloads/Personal/Obsidian/Perso/Clippings
+
+# Cache path (required) - must be absolute or will be resolved relative to vault
+# Following XDG Base Directory Specification: use ~/.cache/clipmd/cache.json
+cache: $HOME/.cache/clipmd/cache.json
+
+# =============================================================================
+# DOMAIN RULES - Automatic categorization by source domain
+# =============================================================================
+# Format: domain: folder
+# Articles from these domains are pre-categorized, reducing LLM token usage
+# (LLM only categorizes articles from unknown domains)
+domain_rules:
+  # HIGH CONFIDENCE: Single-topic specialized domains (AI & Coding)
+  addyosmani.com: AI-Coding-Practices
+  blog.ziade.org: AI-Coding-Practices
+  cursor.com: AI-Coding-Tools
+  github.blog: AI-Coding-Tools
+  steipete.me: AI-Coding-Practices
+  anthropic.com: AI-Context-Engineering
+  every.to: AI-Coding-Practices
+  steve-yegge.medium.com: AI-Coding-Practices
+  tn1ck.com: AI-Claude-Code
+  simonwillison.net: AI-Coding-Practices
+  claude.com: AI-Context-Engineering
+  openai.com: AI-Coding-Tools
+
+  # Work & Productivity
+  platformengineering.org: Work
+  swizec.com: Work
+  calnewport.com: Work
+  zenhabits.net: Work
+  natemeyvis.com: Work
+  elastic.co: Work
+  clever.cloud: Work
+  docker.com: Work
+
+  # Tech Enthusiast Content (Geek)
+  arstechnica.com: Geek
+  howtogeek.com: Geek
+  lifehacker.com: Geek
+  artofmanliness.com: Geek
+  dev.to: Geek
+  chainguard.dev: Geek
+  thenextweb.com: Geek
+  journaldugeek.com: Geek
+  korben.info: Geek
+  presse-citron.net: Geek
+
+  # News & Current Events
+  franceinfo.fr: News
+  slate.fr: News
+  nofi.media: News
+  korii.slate.fr: News
+
+  # Miscellaneous & Music
+  nationalgeographic.fr: Misc
+  abcdrduson.com: Misc
+  okayplayer.com: Misc
+  hotnewhiphop.com: Misc
+  hiphopdx.com: Misc
+  rapreviews.com: Misc
+  geo.fr: Misc
+  hulry.com: Misc
+  stephango.com: Misc
+
+# =============================================================================
+# SPECIAL FOLDERS - Exclude from operations and statistics
+# =============================================================================
+special_folders:
+  # Glob patterns for folders to exclude
+  exclude_patterns:
+    - "0-*"        # Folders starting with "0-" (e.g., 0-Read, 0-To-Process)
+    - ".*"         # Hidden folders (e.g., .clipmd, .DS_Store)
+    - "_*"         # Folders starting with "_"
+
+  # Files to ignore in all commands
+  ignore_files:
+    - "README.md"
+    - "CLAUDE.md"
+    - "INBOX.md"
+
+# =============================================================================
+# FRONTMATTER FIELD MAPPING
+# =============================================================================
+# Map semantic fields to actual field names in your files
+# Tool will try each name in order until one is found
+frontmatter:
+  source_url:
+    - source
+    - url
+    - link
+    - original_url
+    - clip_url
+
+  title:
+    - title
+    - name
+
+  published_date:
+    - published
+    - date
+    - publish_date
+
+  clipped_date:
+    - clipped
+    - saved
+    - created
+    - added
+
+  author:
+    - author
+    - by
+    - writer
+    - creator
+
+  description:
+    - description
+    - summary
+    - excerpt
+    - abstract
+
+# =============================================================================
+# DATE HANDLING
+# =============================================================================
+dates:
+  # Date formats to try when parsing (in order)
+  input_formats:
+    - "%Y-%m-%d"           # 2024-01-17
+    - "%Y-%m-%dT%H:%M:%S"  # 2024-01-17T14:30:00
+    - "%d/%m/%Y"           # 17/01/2024
+    - "%B %d, %Y"          # January 17, 2024
+    - "%d %B %Y"           # 17 January 2024
+    - "%Y/%m/%d"           # 2024/01/17
+
+  # Output format for date prefixes
+  output_format: "%Y%m%d"  # 20240117
+
+  # Field priority for date prefix (first found is used)
+  prefix_priority:
+    - published
+    - clipped
+    - created
+
+  # Extract dates from article body when frontmatter fields are empty
+  extract_from_content: true
+
+# =============================================================================
+# URL CLEANING
+# =============================================================================
+url_cleaning:
+  # Tracking parameters to remove
+  remove_params:
+    - utm_source
+    - utm_medium
+    - utm_campaign
+    - utm_content
+    - utm_term
+    - fbclid
+    - gclid
+    - ref
+    - source
+
+# =============================================================================
+# FILENAME SANITIZATION
+# =============================================================================
+filenames:
+  # Character replacement rules (space -> dash, etc.)
+  replacements:
+    " ": "-"
+    "_": "-"
+    "'": ""
+    '"': ""
+    ":": "-"
+    "/": "-"
+    "\\": "-"
+    "|": "-"
+    "?": ""
+    "*": ""
+    "<": ""
+    ">": ""
+
+  # Normalize unicode (NFC, NFD, NFKC, NFKD, or null for no normalization)
+  unicode_normalize: "NFC"
+
+  # Convert to lowercase
+  lowercase: false
+
+  # Max filename length (without extension)
+  max_length: 100
+
+  # Collapse multiple dashes into single dash
+  collapse_dashes: true
+
+# =============================================================================
+# FOLDER STATISTICS
+# =============================================================================
+folders:
+  # Warning thresholds (set to null to disable)
+  warn_below: 10    # Warn if folder has fewer articles
+  warn_above: 45    # Warn if folder has more articles
+
+# =============================================================================
+# CACHE SETTINGS
+# =============================================================================
+cache_config:
+  # Truncate content hash to N characters (null for full hash)
+  hash_length: 16
+
+# =============================================================================
+# FETCH SETTINGS
+# =============================================================================
+fetch:
+  # Request settings
+  timeout: 30                    # Timeout in seconds
+  user_agent: "clipmd/0.1"       # User-Agent header
+  max_concurrent: 5              # Max parallel fetches (async)

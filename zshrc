@@ -12,7 +12,7 @@ else
 fi
 
 # Path
-export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH:$HOME/.local/bin:$HOME/bin"
+export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH:$HOME/.local/bin:$HOME/bin:$HOME/go/bin"
 
 # Editor
 if command -v nvim > /dev/null; then
@@ -42,18 +42,12 @@ autoload -U +X bashcompinit && bashcompinit
 GPG_TTY=$(tty)
 export GPG_TTY
 
-# Pipx
-if command -v pipx > /dev/null; then
-  autoload -U compinit && compinit
-  eval "$(register-python-argcomplete pipx)"
-fi
-
 # Vault
 if command -v vault > /dev/null; then
   complete -o nospace -C "$(which vault)" vault
 fi
 
-# Gnu sed
+# Gnu Sed
 if [ -d "$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin" ]; then
   export PATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin:$PATH"
 fi
@@ -70,14 +64,15 @@ then
   compinit
 fi
 
-# kubebuilder autocompletion
-if command -v kubebuilder > /dev/null; then
-  . <(kubebuilder completion zsh)
+# Argo completion
+if command -v argo > /dev/null; then
+  source <(argo completion zsh)
 fi
 
-
 # Direnv
-eval "$(direnv hook zsh)"
+if command -v direnv > /dev/null; then
+  eval "$(direnv hook zsh)"
+fi
 
 # Custom profiles
 if [ -f "$HOME/.aliases.zsh" ]; then

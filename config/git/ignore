@@ -10,3 +10,9 @@ ve/
 venv/
 credentials.json
 *.token
+**/CLAUDE.local.md
+**/.claude/*.local.*
+.bk.yaml
+.worktrees/
+
+**/.claude/.cc-writes/
