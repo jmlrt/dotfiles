@@ -22,3 +22,12 @@ mkdir -p ~/.ssh/sockets
 symlink config/tmux/tmux.conf ~/.config/tmux/tmux.conf
 symlink config/vscode/keybindings.json "$HOME/Library/Application Support/Code/User/keybindings.json"
 symlink zshrc ~/.zshrc
+
+# Shared skills from jmlrt/skills, for Codex/agents and Claude Code
+mkdir -p ~/.agents/skills ~/.claude/skills
+for skill in ~/Code/jmlrt/skills/*/SKILL.md; do
+    skill=$(basename "$(dirname "$skill")")
+    ln -nsf ~/Code/jmlrt/skills/"$skill" ~/.agents/skills/"$skill"
+    ln -nsf ~/.agents/skills/"$skill" ~/.claude/skills/"$skill"
+    echo "Skill $skill linked"
+done
