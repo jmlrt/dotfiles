@@ -1,8 +1,8 @@
 set nocompatible " disable legacy compatible
 set background=dark
 set cursorline
-set nowrap " don't wrap lines
-set number " print line numbers
+set wrap
+set nonumber
 set tabstop=2 expandtab " set tab to 2 spaces
 set shiftwidth=2 " set indent to 2 spaces
 syntax enable " enable syntax highlighting
@@ -14,7 +14,7 @@ set colorcolumn=80
 " vim-plug
 call plug#begin('~/.config/nvim/plugged')
     Plug 'neovim/nvim-lspconfig'
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'preservim/nerdtree'
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
@@ -24,8 +24,8 @@ call plug#begin('~/.config/nvim/plugged')
 call plug#end()
 
 " nerdtree
-let NERDTreeShowHidden=1
-map <silent> <C-n> :NERDTreeToggle %<CR> " % to open NERDTree in the current directory
+"let NERDTreeShowHidden=1
+"map <silent> <C-n> :NERDTreeToggle %<CR> " % to open NERDTree in the current directory
 
 " fzf
 nnoremap <C-P> :Files<CR>
@@ -41,7 +41,7 @@ if has("autocmd")
 endif
 
 " fzf
-set rtp+=/opt/homebrew/opt/fzf
+execute 'set rtp+=' . $HOMEBREW_PREFIX . '/opt/fzf'
 
 " folding
 set foldmethod=indent
@@ -78,62 +78,3 @@ set mouse=
 
 map <S-w> :set wrap!<CR>
 map <S-x> :set number!<CR>
-
-" treesitter
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  -- A list of parser names, or "all"
-  ensure_installed = {
-    "bash",
-    "c",
-    "clojure",
-    "comment",
-    "css",
-    "dockerfile",
-    "go",
-    "hcl",
-    "html",
-    "java",
-    "javascript",
-    "json",
-    "kotlin",
-    "lua",
-    "make",
-    "markdown",
-    "perl",
-    "php",
-    "python",
-    "regex",
-    "rst",
-    "ruby",
-    "rust",
-    "scala",
-    "sql",
-    "toml",
-    "typescript",
-    "vim",
-    "yaml",
-  },
-
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
-
-  -- Automatically install missing parsers when entering buffer
-  auto_install = true,
-
-  highlight = {
-    -- `false` will disable the whole extension
-    enable = true,
-
-    -- list of language that will be disabled
-    disable = {},
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-}
-require'lspconfig'.pyright.setup{}
-EOF

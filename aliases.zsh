@@ -3,19 +3,23 @@
 alias edit_aliases="nvim $HOME/.aliases.zsh"
 alias reload_aliases="source $HOME/.aliases.zsh"
 
+# Englog
+alias eltt="englog"
+
 # Git Aliases & Functions
+export PATH_GIT="$HOME/Code"
 
 alias g="git"
 alias ga="git add"
 alias gd="git diff"
 alias gds="git diff --staged"
-alias gmp="git_main_pull && git_cleanup_branches.sh"
+alias gmp="git_main_pull && git remote prune origin && git branch -vv | awk '/: gone\]/ { if (\$1 != \"*\" && \$1 != \"+\") print \$1 }' | xargs git branch -D"
 alias gst="git st"
 
 git_fetch_all() {
-    for repo in $(find "$HOME"/git -type d -name .git); do
-        git -C $(dirname "$repo") fetch --all
-    done
+   for repo in $(find "$PATH_GIT" -type d -name .git); do
+       git -C $(dirname "$repo") fetch --all
+   done
 }
 
 git_main_pull() {
@@ -78,33 +82,16 @@ alias krmd="kubectl delete deployment"
 alias krmp="kubectl delete pod"
 
 # Other Aliases & Functions
-alias cloudshell='gcloud cloud-shell ssh'
 alias d="docker"
-alias pip_upgrade="pip list --local --outdated --format freeze | cut -d= -f1 | xargs pip install --upgrade"
 alias spotify_track='osascript -e '\''tell application "Spotify" to artist of current track & " - " & name of current track'\'
 alias tre="trans en:fr"
 alias trf="trans fr:en"
 alias vim=nvim
 alias week_number="date +'So this is week: %U of %Y'"
-alias yt=" youtube-dl"
+alias yt="yt-dlp"
 
 mkcd() {
     mkdir -p -- "$1" && cd -P -- "$1"
-}
-
-venv_tmp() {
-    packages=($@)
-    tmpdir=$(mktemp -d)
-    cd "$tmpdir"
-    python3 -m venv venv
-    ./venv/bin/pip install --upgrade pip
-    ./venv/bin/pip install --upgrade setuptools
-    ./venv/bin/pip install --upgrade wheel
-    ./venv/bin/pip install --upgrade ipython
-    for pkg in ${packages[@]}; do
-        ./venv/bin/pip install "$pkg"
-    done
-    source ./venv/bin/activate
 }
 
 tz() {
@@ -118,15 +105,14 @@ tz() {
 }
 
 update() {
-    brew update && brew upgrade && brew upgrade --cask && brew cleanup
-    pipx upgrade-all
+    brew update && brew upgrade && brew cleanup
+    uv tool upgrade --all
 }
 
 # FZF Functions
 
 # https://mattorb.com/the-many-faces-of-fzf/
 fcd() {
-    set -x
     if [ -z "$1" ]; then
         searchdir=.
     else
@@ -162,11 +148,14 @@ FZF-EOF"
 
 # https://seb.jambor.dev/posts/improving-shell-workflows-with-fzf/
 git_delete_branches() {
-    git branch |
+    local branches
+    branches=$(git branch |
         grep --invert-match '\*' |
         cut -c 3- |
-        fzf --multi --preview="git log {} --" |
-        xargs --no-run-if-empty git branch --delete --force
+        fzf --multi --preview="git log {} --")
+    if [ -n "$branches" ]; then
+        echo "$branches" | xargs git branch --delete --force
+    fi
 }
 
 # https://seb.jambor.dev/posts/improving-shell-workflows-with-fzf/
@@ -185,14 +174,6 @@ git_pr_checkout() {
     fi
 }
 
-git_clean_squash_merge_branches_master() {
-  git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done
-}
-
-git_clean_squash_merge_branches_main() {
-  git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done
-}
-
 vault_totp() {
     vault read --field=code "totp/code/$(vault list totp/keys | fzf)"
 }
@@ -204,4 +185,10 @@ vault_totp_copy() {
     fi
     vault read -field=code "totp/code/$1" | pbcopy
     echo "TOTP for $1 copied to clipboard"
+}
+
+prune_worktrees() {
+  for w in $(git worktree list | awk '/.worktrees/ {print $1}'); do
+    git worktree remove $w
+  done
 }

@@ -1,17 +1,12 @@
 [user]
   name = Julien Mailleret
   email = 8582351+jmlrt@users.noreply.github.com
-  # signingkey = <defined in local shell config>
 
 [commit]
   gpgsign = true
 
 [core]
-  excludesfile = /Users/jmlrt/.gitignore_global
-  editor = nvim
-
-[credential]
-  helper = cache
+	editor = nvim -n -i NONE
 
 [diff]
   colorMoved = default
@@ -77,6 +72,10 @@
   fedlog = !HASH=`git log --pretty=oneline | head -n 50 | fzf` && HASHZ=`echo ${HASH} | awk '{ print $1 }'` && FILES=`git show --pretty='format:' --name-only $HASHZ | grep -v -e '^$' | fzf -x -m` && nvim ${FILES}
   # fuzzy reset back to prior commit
   freset = !HASH=`git log --pretty=oneline | head -n 50 | fzf` && git reset --soft `echo ${HASH} | awk '{ print $1 }'`^
+	fetch-all = !git fetch --all && git fetch upstream
 
 [url "git@github.com:"]
-  insteadOf = https://github.com/
+	insteadOf = https://github.com/
+
+[include]
+  path = ~/.config/git/config.local

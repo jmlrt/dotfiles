@@ -1,6 +1,0 @@
-black
-flake8
-ipython
-pipx
-poetry
-wheel

@@ -55,28 +55,6 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "J", function()
   win:setFrame(f)
 end)
 
--- Mute when not connected to home Wifi
-wifiWatcher = nil
-homeSSID = "freedonuts"
-lastSSID = hs.wifi.currentNetwork()
-
-function ssidChangedCallback()
-  newSSID = hs.wifi.currentNetwork()
-
-  if newSSID == homeSSID and lastSSID ~= homeSSID then
-    -- We just joined our home WiFi network
-    hs.audiodevice.defaultOutputDevice():setVolume(25)
-  elseif newSSID ~= homeSSID and lastSSID == homeSSID then
-    -- We just departed our home WiFi network
-    hs.audiodevice.defaultOutputDevice():setVolume(0)
-  end
-
-  lastSSID = newSSID
-end
-
-wifiWatcher = hs.wifi.watcher.new(ssidChangedCallback)
-wifiWatcher:start()
-
 -- Defeat paste blocking
 hs.hotkey.bind({"cmd", "alt"}, "V", function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end)
 
@@ -110,7 +88,3 @@ function mouseHighlight()
   mouseCircleTimer = hs.timer.doAfter(3, function() mouseCircle:delete() end)
 end
 hs.hotkey.bind({"cmd","alt","shift"}, "D", mouseHighlight)
-
-hs.urlevent.bind("someAlert", function(eventName, params)
-                   hs.alert.show("Received someAlert")
-end)
