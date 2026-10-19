@@ -26,17 +26,17 @@ symlink config/ghostty/config ~/.config/ghostty/config
 symlink config/nvim/init.vim ~/.config/nvim/init.vim
 symlink config/git/config ~/.config/git/config
 symlink config/markdownlint/markdownlint.yaml ~/.config/markdownlint/markdownlint.yaml
-symlink terraformrc ~/.terraformrc
 symlink gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 symlink gnupg/pinentry-wrapper.sh ~/.gnupg/pinentry-wrapper.sh
 chmod +x "$DOTFILES_HOME/gnupg/pinentry-wrapper.sh"
 symlink hammerspoon/init.lua ~/.hammerspoon/init.lua
 symlink ssh/config ~/.ssh/config
+mkdir -p ~/.ssh/sockets
 symlink config/tmux/tmux.conf ~/.config/tmux/tmux.conf
 symlink zshrc ~/.zshrc
 
-#install_spoon Caffeine
-#install_spoon Cherry
-#install_spoon ReloadConfiguration
-#install_spoon WindowHalfsAndThirds
-#install_spoon WindowScreenLeftAndRight
+if [ "$1" = "--install-spoons" ]; then
+    for spoon in Caffeine Cherry ReloadConfiguration WindowHalfsAndThirds WindowScreenLeftAndRight; do
+        install_spoon $spoon
+    done
+fi

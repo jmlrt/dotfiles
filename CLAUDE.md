@@ -12,11 +12,11 @@ Personal dotfiles for macOS. Configuration files are version-controlled here and
 ./install.sh
 ```
 
-This creates symlinks (e.g. `~/.zshrc -> dotfiles/zshrc`) and downloads Hammerspoon Spoons from GitHub.
+This creates symlinks (e.g. `~/.zshrc -> dotfiles/zshrc`). Add `--install-spoons` to also download the Hammerspoon Spoons from GitHub.
 
 To install Homebrew packages:
 ```bash
-brew bundle --file Brewfile.personal
+brew bundle --file Brewfile
 ```
 
 ## Architecture
