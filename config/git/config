@@ -41,25 +41,20 @@
   co = checkout
   cp = cherry-pick
   df = diff
-  dmb = "!git branch --merged | grep -v \"^\\*\" | grep -v \"^\\+\" | grep -v '^  master$' | grep -v '^  develop$' | xargs -n 1 git branch -d"
   lg = log --graph --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ar)%Creset'
-  pl = pull --rebase
-  pr = "!f() { git fetch origin pull/$1/head:pr/$1; }; f"
   sa = stash
   st = status -sb
   unstage = reset -q HEAD --
   discard = checkout --
   uncommit = reset --mixed HEAD~
   # stash unstaged and untracked changes
-  stashwip = stash save -u -k "WIP"
+  stashwip = stash push -u -k -m "WIP"
   # show recent branches
   short-recent = "for-each-ref --count=25 --sort=committerdate refs/heads/ --format='%(refname:short)'"
   # fuzzy add using fzf
   fza = "!git ls-files -m -o --exclude-standard | fzf --print0 -m --preview 'git diff {}' --preview-window=top:10:wrap | xargs -0 -t -o git add --all"
   # fuzzy switch branch...  /fish/functions/fco.fish seems better
   fco = "!git short-recent | fzf --print0 | xargs -0 -t git checkout"
-  # fuzzy fix staged changes into existing commit
-  ffix = !HASH=`git log --pretty=oneline | head -n 100 | fzf` && git fixit `echo ${HASH} | awk '{ print $1 }'`
   # fuzzy rebase interactive choose existing commit to start from
   frebase = !HASH=`git log --pretty=oneline | head -n 100 | fzf` && git rebase -i `echo ${HASH} | awk '{ print $1 }'`^
   # fuzzy edit untracked/modified files
@@ -72,7 +67,6 @@
   fedlog = !HASH=`git log --pretty=oneline | head -n 50 | fzf` && HASHZ=`echo ${HASH} | awk '{ print $1 }'` && FILES=`git show --pretty='format:' --name-only $HASHZ | grep -v -e '^$' | fzf -x -m` && nvim ${FILES}
   # fuzzy reset back to prior commit
   freset = !HASH=`git log --pretty=oneline | head -n 50 | fzf` && git reset --soft `echo ${HASH} | awk '{ print $1 }'`^
-	fetch-all = !git fetch --all && git fetch upstream
 
 [url "git@github.com:"]
 	insteadOf = https://github.com/

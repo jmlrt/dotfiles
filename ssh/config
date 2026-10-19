@@ -1,12 +1,8 @@
 Host *
-  User jmlrt
   AddKeysToAgent yes
-  ForwardAgent yes
   UseKeychain yes
-  StrictHostKeyChecking no
+  StrictHostKeyChecking accept-new
   ServerAliveInterval 20
-  ServerAliveCountMax 180
-  TCPKeepAlive yes
   ControlMaster auto
   ControlPath ~/.ssh/sockets/%r@%h-%p
   ControlPersist 600
