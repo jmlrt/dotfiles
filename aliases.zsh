@@ -146,16 +146,6 @@ fkill() {
     fi
 }
 
-tz() {
-    # zones in /usr/share/zoneinfo
-    for zone in US/Pacific US/Central US/Eastern UTC Europe/Amsterdam Europe/Paris Australia/Adelaide; do
-        TZ="$zone"
-        echo "$TZ"
-        printf "  "
-        TZ="$TZ" date
-    done
-}
-
 update() {
     brew update && brew upgrade && brew cleanup
     uv tool upgrade --all
