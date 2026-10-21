@@ -1,3 +1,5 @@
+Include /Users/jmlrt/.colima/ssh_config
+
 Host *
   AddKeysToAgent yes
   UseKeychain yes

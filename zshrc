@@ -2,17 +2,11 @@
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# Homebrew
-# This is required to ensure compatibility with both macOS Intel & macOS M1
-# because brew use different path on different archs
-if [ -f /opt/homebrew/bin/brew ]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-else
-  eval "$(brew shellenv)"
-fi
+# Homebrew (Apple Silicon)
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Path
-export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH:$HOME/.local/bin:$HOME/bin:$HOME/go/bin"
+export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH:$HOME/.local/bin:$HOME/bin"
 
 # Homebrew completions (must be in FPATH before oh-my-zsh runs compinit)
 FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions:${FPATH}"
@@ -36,7 +30,7 @@ if [ -f "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; 
 fi
 
 # FZF
-[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
+command -v fzf > /dev/null && source <(fzf --zsh)
 
 # Git
 GPG_TTY=$(tty)

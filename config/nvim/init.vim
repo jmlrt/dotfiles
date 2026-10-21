@@ -13,21 +13,11 @@ set colorcolumn=80
 
 " vim-plug
 call plug#begin('~/.config/nvim/plugged')
-    Plug 'neovim/nvim-lspconfig'
-    "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    Plug 'preservim/nerdtree'
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    Plug 'junegunn/goyo.vim'
-    Plug 'jceb/vim-orgmode'
-    Plug 'vim-airline/vim-airline'
 call plug#end()
 
-" nerdtree
-"let NERDTreeShowHidden=1
-"map <silent> <C-n> :NERDTreeToggle %<CR> " % to open NERDTree in the current directory
-
 " fzf
+execute 'set rtp+=' . $HOMEBREW_PREFIX . '/opt/fzf'
 nnoremap <C-P> :Files<CR>
 nnoremap <C-R> :Rg<CR>
 
@@ -39,9 +29,6 @@ set wildmenu
 if has("autocmd")
   filetype indent plugin on
 endif
-
-" fzf
-execute 'set rtp+=' . $HOMEBREW_PREFIX . '/opt/fzf'
 
 " folding
 set foldmethod=indent
@@ -58,23 +45,9 @@ au BufNewFile,BufRead *.py
     \ set autoindent |
     \ set fileformat=unix|
 
-" disable mouse interactions "
-"set mouse=nicr
-"map <ScrollWheelUp> <nop>
-"map <S-ScrollWheelUp> <nop>
-"map <C-ScrollWheelUp> <nop>
-"map <ScrollWheelDown> <nop>
-"map <S-ScrollWheelDown> <nop>
-"map <C-ScrollWheelDown> <nop>
-"map <ScrollWheelLeft> <nop>
-"map <S-ScrollWheelLeft> <nop>
-"map <C-ScrollWheelLeft> <nop>
-"map <ScrollWheelRight> <nop>
-"map <S-ScrollWheelRight> <nop>
-"map <C-ScrollWheelRight> <nop>
-"set mouse-=a "https://gist.github.com/u0d7i/01f78999feff1e2a8361
-" https://vi.stackexchange.com/questions/13566/fully-disable-mouse-in-console-vim
+" disable mouse interactions
 set mouse=
 
-map <S-w> :set wrap!<CR>
-map <S-x> :set number!<CR>
+" <leader>w / <leader>n instead of <S-w>/<S-x>, which shadow real motions
+nnoremap <leader>w :set wrap!<CR>
+nnoremap <leader>n :set number!<CR>

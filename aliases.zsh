@@ -136,6 +136,7 @@ alias tre="trans en:fr"
 alias trf="trans fr:en"
 alias vim=nvim
 alias week_number="date +'So this is week: %U of %Y'"
+alias yt="yt-dlp"
 
 # Other Functions
 # https://mattorb.com/the-many-faces-of-fzf/

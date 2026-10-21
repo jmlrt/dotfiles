@@ -80,7 +80,7 @@ special_folders:
   # Files to ignore in all commands
   ignore_files:
     - "README.md"
-    - "CLAUDE.md"
+    - "AGENTS.md"
     - "INBOX.md"
 
 # =============================================================================
