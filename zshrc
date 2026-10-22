@@ -6,7 +6,7 @@ export LC_ALL=en_US.UTF-8
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Path
-export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH:$HOME/.local/bin:$HOME/bin"
+export PATH="$PATH:$HOME/.local/bin:$HOME/bin"
 
 # Homebrew completions (must be in FPATH before oh-my-zsh runs compinit)
 FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions:${FPATH}"
@@ -19,8 +19,6 @@ fi
 # Oh-my-zsh
 if [ -d "$HOME/.oh-my-zsh" ]; then
   export ZSH="$HOME/.oh-my-zsh"
-  # shellcheck disable=SC2034
-  ZSH_THEME="robbyrussell"
   source "$ZSH/oh-my-zsh.sh"
 fi
 
