@@ -16,22 +16,6 @@ mkcd() {
     mkdir -p -- "$1" && cd -P -- "$1"
 }
 
-# https://mattorb.com/the-many-faces-of-fzf/
-fcd() {
-    if [ -z "$1" ]; then
-        searchdir=.
-    else
-        searchdir=$1
-    fi
-    destdir=$(find "$searchdir" \( ! -regex '.*/\..*' \) ! -name __pycache__ ! -name venv ! -name .direnv -type d | fzf)
-    if [ -z "$destdir" ]; then
-        return 1
-    else
-        echo Destination: "$destdir"
-        cd "$destdir"
-    fi
-}
-
 # Git Aliases
 alias g="git"
 alias ga="git add"
@@ -113,13 +97,6 @@ git_pr_checkout() {
     if [ -n "$pr_number" ]; then
         gh pr checkout "$pr_number"
     fi
-}
-
-github_open_commit() {
-    org=$1
-    repo=$2
-    sha=$3
-    open "https://github.com/$org/$repo/commit/$sha"
 }
 
 github_query_commit() {

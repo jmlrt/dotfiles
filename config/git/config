@@ -44,8 +44,6 @@
   lg = log --graph --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ar)%Creset'
   sa = stash
   st = status -sb
-  unstage = reset -q HEAD --
-  discard = checkout --
   uncommit = reset --mixed HEAD~
   # stash unstaged and untracked changes
   stashwip = stash push -u -k -m "WIP"

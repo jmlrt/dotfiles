@@ -1,7 +1,3 @@
-# Locales
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
 # Homebrew (Apple Silicon)
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -29,10 +25,6 @@ fi
 
 # FZF
 command -v fzf > /dev/null && source <(fzf --zsh)
-
-# Git
-GPG_TTY=$(tty)
-export GPG_TTY
 
 # Direnv
 if command -v direnv > /dev/null; then
