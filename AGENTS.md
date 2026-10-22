@@ -42,6 +42,7 @@ Key mappings:
 - `config/nvim/init.vim` → `~/.config/nvim/init.vim`
 - `hammerspoon/init.lua` → `~/.hammerspoon/init.lua`
 - `ssh/config` → `~/.ssh/config`
+- `zprofile` → `~/.zprofile` (Obsidian CLI PATH)
 
 ### Shell configuration split
 

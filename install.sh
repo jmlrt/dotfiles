@@ -33,6 +33,7 @@ symlink hammerspoon/init.lua ~/.hammerspoon/init.lua
 symlink ssh/config ~/.ssh/config
 mkdir -p ~/.ssh/sockets
 symlink config/tmux/tmux.conf ~/.config/tmux/tmux.conf
+symlink zprofile ~/.zprofile
 symlink zshrc ~/.zshrc
 
 if [ "$1" = "--install-spoons" ]; then
