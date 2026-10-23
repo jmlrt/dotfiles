@@ -7,6 +7,23 @@ setopt extended_history hist_ignore_dups hist_ignore_space hist_expire_dups_firs
 # Completions (Homebrew zsh functions must be in FPATH before compinit)
 FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions:${FPATH}"
 autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' menu select
+
+# Up/down arrows search history by the typed prefix
+autoload -U up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '^[[A' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search
+
+# Prompt (current dir; set before ~/.elastic.zsh, which prepends kube-ps1)
+PROMPT='%1~ %# '
+
+# Colors and navigation
+export CLICOLOR=1
+alias grep='grep --color=auto'
+setopt auto_cd
 
 # ZSH Autosuggestions
 if [ -f "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
