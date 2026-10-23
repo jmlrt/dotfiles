@@ -5,8 +5,8 @@ DOTFILES_HOME=$(cd "$(dirname "$0")" && pwd)
 function symlink() {
     src=$DOTFILES_HOME/$1
     dst=$2
-    dst_dir=$(dirname $dst)
-    mkdir -p $dst_dir
+    dst_dir=$(dirname "$dst")
+    mkdir -p "$dst_dir"
     ln -nsf "$src" "$dst" && echo "File $src linked to $dst"
 }
 
