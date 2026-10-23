@@ -30,7 +30,7 @@ brew bundle --file Brewfile
 
 The uv-managed CLI agent is the PyPI package `mistral-vibe`. Do not `uv tool install vibe`: that is an unrelated, source-only package whose build pulls in a Rust toolchain.
 
-`bw-backup` and `spotfm` are personal tools, not on PyPI. The Brewfile lists them bare so `brew bundle check`/`cleanup` recognize them once installed, but `brew bundle install` cannot fetch them. First install is manual: `uv tool install "git+ssh://git@github.com/jmlrt/toolbox.git#subdirectory=bw-backup"` and `uv tool install --editable ~/Code/spotfm`. A `source:` stanza does not work: brew bundle rejects local paths by design, and its `uv tool list` parser cannot read git sources back (the required spec wraps across lines), so a sourced entry never matches the installed tool.
+`bw-backup` and `spotfm` are personal tools, not on PyPI; `clipmd` is published there but kept as a local editable install. The Brewfile lists them bare so `brew bundle check`/`cleanup` recognize them once installed, but `brew bundle install` cannot fetch them. First install is manual: `uv tool install "git+ssh://git@github.com/jmlrt/toolbox.git#subdirectory=bw-backup"`, `uv tool install --editable ~/Code/spotfm`, and `uv tool install --editable ~/Code/clipmd`. A `source:` stanza does not work: brew bundle rejects local paths by design, and its `uv tool list` parser cannot read git sources back (the required spec wraps across lines), so a sourced entry never matches the installed tool.
 
 ## Architecture
 
