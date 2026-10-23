@@ -10,7 +10,6 @@ function symlink() {
     ln -nsf "$src" "$dst" && echo "File $src linked to $dst"
 }
 
-symlink aliases.zsh ~/.aliases.zsh
 symlink config/clipmd/config.yaml ~/.config/clipmd/config.yaml
 symlink config/git/ignore ~/.config/git/ignore
 symlink config/ghostty/config ~/.config/ghostty/config
@@ -18,8 +17,6 @@ symlink config/vim/vimrc ~/.vimrc
 symlink config/git/config ~/.config/git/config
 symlink config/markdownlint/markdownlint.yaml ~/.config/markdownlint/markdownlint.yaml
 symlink gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
-symlink gnupg/pinentry-wrapper.sh ~/.gnupg/pinentry-wrapper.sh
-chmod +x "$DOTFILES_HOME/gnupg/pinentry-wrapper.sh"
 symlink ssh/config ~/.ssh/config
 mkdir -p ~/.ssh/sockets
 symlink config/tmux/tmux.conf ~/.config/tmux/tmux.conf

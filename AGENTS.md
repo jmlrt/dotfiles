@@ -38,17 +38,16 @@ The uv-managed CLI agent is the PyPI package `mistral-vibe`. Do not `uv tool ins
 
 Key mappings:
 - `zshrc` → `~/.zshrc`
-- `aliases.zsh` → `~/.aliases.zsh`
 - `config/git/config` → `~/.config/git/config`
 - `config/git/ignore` → `~/.config/git/ignore` (used by git as the global excludes file via XDG)
 - `config/vim/vimrc` → `~/.vimrc` (macOS-shipped Vim 9.1; neovim was dropped)
 - `ssh/config` → `~/.ssh/config`
-- `zprofile` → `~/.zprofile` (Obsidian CLI PATH)
+- `zprofile` → `~/.zprofile` (login environment: locale, Homebrew shellenv, PATH, EDITOR)
 
 ### Shell configuration split
 
-- `zshrc` — shell init, PATH, history and completion (no framework; oh-my-zsh was dropped), tool integrations
-- `aliases.zsh` — all aliases and functions (git, fzf utilities)
+- `zprofile` — login environment (locale, Homebrew shellenv, PATH, EDITOR); sourced once, inherited by all interactive shells
+- `zshrc` — interactive setup (history, completion, autosuggestions, fzf, direnv) plus all aliases and functions (git, fzf utilities)
 - `~/.personal.zsh` — sourced if present; not tracked here (per-machine local extras)
 - `~/.elastic.zsh` — sourced if present; not tracked here (work-machine specifics; the file only exists on the work laptop)
 - **No `git config --global` in shell startup**: parallel terminals or a stale lock give "could not lock config
@@ -59,5 +58,4 @@ Key mappings:
 ### GPG signing
 
 Git commits and tags are signed by default. The signing key differs per machine, so it is not tracked: set
-`user.signingkey` in `~/.config/git/config.local`. `gnupg/gpg-agent.conf` calls
-`gnupg/pinentry-wrapper.sh`, which runs `pinentry-mac` from `PATH` (gpg-agent doesn't expand `$HOMEBREW_PREFIX`).
+`user.signingkey` in `~/.config/git/config.local`. `gnupg/gpg-agent.conf` points `pinentry-program` directly at `/opt/homebrew/bin/pinentry-mac` (Apple Silicon Homebrew prefix; gpg-agent needs an absolute path).
