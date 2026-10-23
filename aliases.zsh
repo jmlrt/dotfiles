@@ -124,6 +124,29 @@ fkill() {
     fi
 }
 
+# detox replacement: normalize filenames to web-safe slugs (perl/tr/sed are macOS built-ins)
+slug() {
+    local base name clean ext target
+    for f in "$@"; do
+        base="${f%/*}"
+        [ "$base" = "$f" ] && base="."
+        name="${f##*/}"
+        if [ "${name[1]}" = "." ]; then
+            echo "skip (dotfile): $f"
+            continue
+        fi
+        clean=$(printf '%s' "${name%.*}" | perl -CSD -pe 'use Unicode::Normalize qw(NFD); $_ = NFD($_); s/[^\p{ASCII}]//g; tr/A-Z/a-z/' | tr -cs 'a-z0-9' '-' | sed -E 's/^-+//; s/-+$//')
+        if [ -z "$clean" ]; then
+            echo "skip (nothing left after normalization): $f"
+            continue
+        fi
+        ext="${name##*.}"
+        [ "$ext" != "$name" ] && ext=".$ext" || ext=""
+        target="$base/$clean$ext"
+        [ "$f" != "$target" ] && mv -v -- "$f" "$target"
+    done
+}
+
 # caffeinate replacement for the retired Hammerspoon Caffeine spoon
 coffee() { caffeinate -di "$@"; }
 alias decaf="pkill caffeinate"

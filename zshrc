@@ -7,18 +7,19 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Path
 export PATH="$PATH:$HOME/.local/bin:$HOME/bin"
 
-# Homebrew completions (must be in FPATH before oh-my-zsh runs compinit)
+# History (replaces the oh-my-zsh defaults)
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt extended_history hist_ignore_dups hist_ignore_space hist_expire_dups_first share_history
+
+# Completions (Homebrew zsh functions must be in FPATH before compinit)
 FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions:${FPATH}"
+autoload -Uz compinit && compinit
 
 # Editor
 if command -v nvim > /dev/null; then
   export EDITOR=nvim
-fi
-
-# Oh-my-zsh
-if [ -d "$HOME/.oh-my-zsh" ]; then
-  export ZSH="$HOME/.oh-my-zsh"
-  source "$ZSH/oh-my-zsh.sh"
 fi
 
 # ZSH Autosuggestions

@@ -47,7 +47,7 @@ Key mappings:
 
 ### Shell configuration split
 
-- `zshrc` — shell init, PATH, Oh-My-Zsh (which also provides history defaults), tool integrations
+- `zshrc` — shell init, PATH, history and completion (no framework; oh-my-zsh was dropped), tool integrations
 - `aliases.zsh` — all aliases and functions (git, fzf utilities)
 - `~/.personal.zsh` — sourced if present; not tracked here (per-machine local extras)
 - `~/.elastic.zsh` — sourced if present; not tracked here (work-machine specifics; the file only exists on the work laptop)
