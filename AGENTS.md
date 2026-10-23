@@ -30,6 +30,8 @@ brew bundle --file Brewfile
 
 The uv-managed CLI agent is the PyPI package `mistral-vibe`. Do not `uv tool install vibe`: that is an unrelated, source-only package whose build pulls in a Rust toolchain.
 
+`bw-backup` and `spotfm` are personal tools, not on PyPI. The Brewfile lists them bare so `brew bundle check`/`cleanup` recognize them once installed, but `brew bundle install` cannot fetch them. First install is manual: `uv tool install "git+ssh://git@github.com/jmlrt/toolbox.git#subdirectory=bw-backup"` and `uv tool install --editable ~/Code/spotfm`. A `source:` stanza does not work: brew bundle rejects local paths by design, and its `uv tool list` parser cannot read git sources back (the required spec wraps across lines), so a sourced entry never matches the installed tool.
+
 ## Architecture
 
 ### Symlink mapping
@@ -59,3 +61,5 @@ Key mappings:
 
 Git commits and tags are signed by default. The signing key differs per machine, so it is not tracked: set
 `user.signingkey` in `~/.config/git/config.local`. `gnupg/gpg-agent.conf` points `pinentry-program` directly at `/opt/homebrew/bin/pinentry-mac` (Apple Silicon Homebrew prefix; gpg-agent needs an absolute path).
+
+This repository is public: never stage or commit GPG key material, exported keys, or any other secrets. The migration procedure (commands only) lives in `Readme.md`; `detect-private-key` runs as a pre-commit hook.

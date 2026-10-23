@@ -2,6 +2,7 @@ brew "bitwarden-cli"
 brew "colima"
 brew "direnv"
 brew "docker"
+brew "docker-compose"
 brew "fdupes"
 brew "fzf"
 brew "gh"
@@ -36,12 +37,13 @@ cask "spotify"
 cask "synology-drive"
 cask "visual-studio-code"
 
-uv "bw-backup"
+uv "bw-backup" # personal tool, not on PyPI: uv tool install "git+ssh://git@github.com/jmlrt/toolbox.git#subdirectory=bw-backup"
 uv "clipmd"
 uv "mistral-vibe"
 uv "pre-commit"
 uv "ruff"
-uv "spotfm"
+uv "spotfm" # personal tool, not on PyPI: uv tool install --editable ~/Code/spotfm
 
 mas "Bitwarden", id: 1352778147
+mas "Tailscale", id: 1475387142
 mas "WhatsApp Messenger", id: 310633997
