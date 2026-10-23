@@ -45,4 +45,5 @@ uv "ruff"
 uv "spotfm" # personal tool, not on PyPI: uv tool install --editable ~/Code/spotfm
 
 mas "Bitwarden", id: 1352778147
+mas "Tailscale", id: 1475387142
 mas "WhatsApp Messenger", id: 310633997
