@@ -20,6 +20,13 @@ cat > ~/.config/git/config.local <<'EOF'
 EOF
 ```
 
+`bw-backup` and `spotfm` are personal tools that are not on PyPI, so `brew bundle` cannot install them; they are listed in the Brewfile only so that `brew bundle check`/`cleanup` recognize them. First install:
+
+```bash
+uv tool install "git+ssh://git@github.com/jmlrt/toolbox.git#subdirectory=bw-backup"
+uv tool install --editable ~/Code/spotfm
+```
+
 ## Notes
 
 - Window tiling and keep-awake are native: bind shortcuts to the Window > Move & Resize menu items (System Settings > Keyboard > Keyboard Shortcuts > App Shortcuts), and use the `coffee`/`decaf` aliases (caffeinate) instead of Hammerspoon.
