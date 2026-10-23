@@ -10,7 +10,7 @@ Personal dotfiles for macOS. Configuration files are version-controlled here and
 
 These dotfiles target Apple Silicon Macs only:
 
-- Personal: MacBook Pro M3 (2023) — the bootstrap target
+- Personal: MacBook Pro M2 Pro (Mac14,9) — the bootstrap target
 - Work: Apple Silicon (M5, 2026) — work specifics live only in untracked `~/.elastic.zsh`
 
 Homebrew lives at `/opt/homebrew` on both; Intel paths are intentionally not supported (a retired Intel MacBook Pro was the original source of this config). Prefer OS-shipped tools over brew duplicates (macOS has shipped `jq` since Sequoia).
@@ -21,12 +21,14 @@ Homebrew lives at `/opt/homebrew` on both; Intel paths are intentionally not sup
 ./install.sh
 ```
 
-This creates symlinks (e.g. `~/.zshrc -> dotfiles/zshrc`). Add `--install-spoons` to also download the Hammerspoon Spoons from GitHub.
+This creates symlinks (e.g. `~/.zshrc -> dotfiles/zshrc`).
 
-To install Homebrew packages:
+To install Homebrew packages, uv tools, and App Store apps (via `mas`; requires being signed in to the App Store):
 ```bash
 brew bundle --file Brewfile
 ```
+
+The uv-managed CLI agent is the PyPI package `mistral-vibe`. Do not `uv tool install vibe`: that is an unrelated, source-only package whose build pulls in a Rust toolchain.
 
 ## Architecture
 
@@ -40,7 +42,6 @@ Key mappings:
 - `config/git/config` → `~/.config/git/config`
 - `config/git/ignore` → `~/.config/git/ignore` (used by git as the global excludes file via XDG)
 - `config/nvim/init.vim` → `~/.config/nvim/init.vim`
-- `hammerspoon/init.lua` → `~/.hammerspoon/init.lua`
 - `ssh/config` → `~/.ssh/config`
 - `zprofile` → `~/.zprofile` (Obsidian CLI PATH)
 
@@ -60,7 +61,3 @@ Key mappings:
 Git commits and tags are signed by default. The signing key differs per machine, so it is not tracked: set
 `user.signingkey` in `~/.config/git/config.local`. `gnupg/gpg-agent.conf` calls
 `gnupg/pinentry-wrapper.sh`, which runs `pinentry-mac` from `PATH` (gpg-agent doesn't expand `$HOMEBREW_PREFIX`).
-
-### Multi-arch Homebrew
-
-`zshrc` detects Intel vs Apple Silicon and sets `HOMEBREW_PREFIX` accordingly (`/usr/local` vs `/opt/homebrew`).

@@ -1,3 +1,6 @@
+# Locales
+export LANG=en_US.UTF-8
+
 # Homebrew (Apple Silicon)
 eval "$(/opt/homebrew/bin/brew shellenv)"
 

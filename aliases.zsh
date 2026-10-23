@@ -124,6 +124,10 @@ fkill() {
     fi
 }
 
+# caffeinate replacement for the retired Hammerspoon Caffeine spoon
+coffee() { caffeinate -di "$@"; }
+alias decaf="pkill caffeinate"
+
 update() {
     brew update && brew upgrade && brew cleanup
     uv tool upgrade --all

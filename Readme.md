@@ -6,6 +6,7 @@ Personal dotfiles for macOS. Files are version-controlled here and symlinked int
 
 ```bash
 # 1. Install Homebrew (https://brew.sh), clone this repo, then packages
+#    (also installs uv tools and App Store apps via mas — sign in to the App Store first)
 brew bundle --file Brewfile
 
 # 2. Oh My Zsh (zshrc loads it from ~/.oh-my-zsh)
@@ -24,7 +25,7 @@ EOF
 
 ## Notes
 
-- `install.sh --install-spoons` also downloads the Hammerspoon Spoons.
+- Window tiling and keep-awake are native: bind shortcuts to the Window > Move & Resize menu items (System Settings > Keyboard > Keyboard Shortcuts > App Shortcuts), and use the `coffee`/`decaf` aliases (caffeinate) instead of Hammerspoon.
 - `~/.personal.zsh` is sourced by `zshrc` if present; use it for untracked, per-machine shell extras. On the work machine, `~/.elastic.zsh` plays the same role.
 - Git commits and tags are signed by default (`config/git/config`); without step 4 the first commit will fail if gpg has no default key.
 - Migrate GPG signing keys manually: `gpg --export-secret-keys <KEY-ID> > key.gpg` on the old machine, then `gpg --import key.gpg` on the new one.
