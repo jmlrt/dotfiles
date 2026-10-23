@@ -41,7 +41,7 @@ Key mappings:
 - `aliases.zsh` → `~/.aliases.zsh`
 - `config/git/config` → `~/.config/git/config`
 - `config/git/ignore` → `~/.config/git/ignore` (used by git as the global excludes file via XDG)
-- `config/nvim/init.vim` → `~/.config/nvim/init.vim`
+- `config/vim/vimrc` → `~/.vimrc` (macOS-shipped Vim 9.1; neovim was dropped)
 - `ssh/config` → `~/.ssh/config`
 - `zprofile` → `~/.zprofile` (Obsidian CLI PATH)
 

@@ -17,10 +17,8 @@ setopt extended_history hist_ignore_dups hist_ignore_space hist_expire_dups_firs
 FPATH="$HOMEBREW_PREFIX/share/zsh/site-functions:${FPATH}"
 autoload -Uz compinit && compinit
 
-# Editor
-if command -v nvim > /dev/null; then
-  export EDITOR=nvim
-fi
+# Editor (macOS ships vim; /usr/bin/vi is a symlink to it)
+export EDITOR=vim
 
 # ZSH Autosuggestions
 if [ -f "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then

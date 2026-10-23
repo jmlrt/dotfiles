@@ -1,6 +1,6 @@
 # .aliases.zsh
 
-alias edit_aliases="nvim $HOME/.aliases.zsh"
+alias edit_aliases="vim $HOME/.aliases.zsh"
 alias reload_aliases="source $HOME/.aliases.zsh"
 
 # Paths & Navigation
@@ -111,7 +111,6 @@ alias d="docker"
 alias spotify_track='osascript -e '\''tell application "Spotify" to artist of current track & " - " & name of current track'\'
 alias tre="trans en:fr"
 alias trf="trans fr:en"
-alias vim=nvim
 alias week_number="date +'So this is week: %U of %Y'"
 alias yt="yt-dlp"
 

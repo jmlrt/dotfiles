@@ -5,6 +5,10 @@ set tabstop=2 expandtab " set tab to 2 spaces
 set shiftwidth=2 " set indent to 2 spaces
 set autoread " auto reload files
 
+" shipped Vim needs these (they are neovim defaults); Apple's system vimrc sets neither
+syntax enable
+filetype plugin indent on
+
 " bash like file completion
 set wildmode=longest,list,full
 set wildmenu

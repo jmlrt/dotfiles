@@ -14,7 +14,7 @@ symlink aliases.zsh ~/.aliases.zsh
 symlink config/clipmd/config.yaml ~/.config/clipmd/config.yaml
 symlink config/git/ignore ~/.config/git/ignore
 symlink config/ghostty/config ~/.config/ghostty/config
-symlink config/nvim/init.vim ~/.config/nvim/init.vim
+symlink config/vim/vimrc ~/.vimrc
 symlink config/git/config ~/.config/git/config
 symlink config/markdownlint/markdownlint.yaml ~/.config/markdownlint/markdownlint.yaml
 symlink gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
