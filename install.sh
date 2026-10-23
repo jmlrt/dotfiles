@@ -20,5 +20,4 @@ symlink gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 symlink ssh/config ~/.ssh/config
 mkdir -p ~/.ssh/sockets
 symlink config/tmux/tmux.conf ~/.config/tmux/tmux.conf
-symlink zprofile ~/.zprofile
 symlink zshrc ~/.zshrc

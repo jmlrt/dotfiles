@@ -1,3 +1,21 @@
+# Environment (kept here, not in ~/.zprofile, which installers like Docker Desktop
+# edit freely: ~/.zprofile stays an untracked local file)
+
+# Locales
+export LANG=en_US.UTF-8
+
+# Homebrew (Apple Silicon)
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Path
+export PATH="$PATH:$HOME/.local/bin:$HOME/bin"
+
+# Obsidian CLI (the `obsidian` command lives inside the app bundle)
+export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
+
+# Editor (macOS ships vim; /usr/bin/vi is a symlink to it)
+export EDITOR=vim
+
 # History (replaces the oh-my-zsh defaults)
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
