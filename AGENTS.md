@@ -44,12 +44,11 @@ Key mappings:
 - `config/git/ignore` → `~/.config/git/ignore` (used by git as the global excludes file via XDG)
 - `config/vim/vimrc` → `~/.vimrc` (macOS-shipped Vim 9.1; neovim was dropped)
 - `ssh/config` → `~/.ssh/config`
-- `zprofile` → `~/.zprofile` (login environment: locale, Homebrew shellenv, PATH, EDITOR)
 
 ### Shell configuration split
 
-- `zprofile` — login environment (locale, Homebrew shellenv, PATH, EDITOR); sourced once, inherited by all interactive shells
-- `zshrc` — interactive setup (history, completion, autosuggestions, fzf, direnv) plus all aliases and functions (git, fzf utilities)
+- `zshrc` — environment (locale, Homebrew shellenv, PATH, EDITOR), interactive setup (history, completion, autosuggestions, fzf, direnv) plus all aliases and functions (git, fzf utilities)
+- `~/.zprofile` — not tracked: installers (Docker Desktop, Homebrew) append to it, so it stays a local file
 - `~/.personal.zsh` — sourced if present; not tracked here (per-machine local extras)
 - `~/.elastic.zsh` — sourced if present; not tracked here (work-machine specifics; the file only exists on the work laptop)
 - **No `git config --global` in shell startup**: parallel terminals or a stale lock give "could not lock config
