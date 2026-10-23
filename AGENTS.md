@@ -61,3 +61,5 @@ Key mappings:
 
 Git commits and tags are signed by default. The signing key differs per machine, so it is not tracked: set
 `user.signingkey` in `~/.config/git/config.local`. `gnupg/gpg-agent.conf` points `pinentry-program` directly at `/opt/homebrew/bin/pinentry-mac` (Apple Silicon Homebrew prefix; gpg-agent needs an absolute path).
+
+This repository is public: never stage or commit GPG key material, exported keys, or any other secrets. The migration procedure (commands only) lives in `Readme.md`; `detect-private-key` runs as a pre-commit hook.
