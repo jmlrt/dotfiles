@@ -14,5 +14,6 @@ credentials.json
 **/.claude/*.local.*
 .bk.yaml
 .worktrees/
+settings.local.json
 
 **/.claude/.cc-writes/
