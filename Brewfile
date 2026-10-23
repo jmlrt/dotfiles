@@ -38,7 +38,7 @@ cask "synology-drive"
 cask "visual-studio-code"
 
 uv "bw-backup" # personal tool, not on PyPI: uv tool install "git+ssh://git@github.com/jmlrt/toolbox.git#subdirectory=bw-backup"
-uv "clipmd"
+uv "clipmd" # personal tool kept as a local editable install: uv tool install --editable ~/Code/clipmd
 uv "mistral-vibe"
 uv "pre-commit"
 uv "ruff"
