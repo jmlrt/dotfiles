@@ -28,7 +28,7 @@ cat > ~/.config/git/config.local <<'EOF'
 EOF
 ```
 
-`bw-backup` and `spotfm` are personal tools that are not on PyPI, and `clipmd` (published on PyPI) is kept as a local editable install; `brew bundle` cannot install any of them this way, so they are listed in the Brewfile only so that `brew bundle check`/`cleanup` recognize them. First install:
+`bw-backup`, `spotfm` and `clipmd` are personal tools installed from the local clones, not via `brew bundle`; they are listed in the Brewfile only so that `brew bundle check`/`cleanup` recognize them. First install:
 
 ```bash
 uv tool install "git+ssh://git@github.com/jmlrt/toolbox.git#subdirectory=bw-backup"
