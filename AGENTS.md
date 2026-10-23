@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This file provides guidance to AI coding agents (Mistral Vibe, Claude Code) when working with code in this repository.
+This file provides guidance to AI coding agents (Mistral Vibe) when working with code in this repository.
 
 ## Overview
 

@@ -124,10 +124,14 @@ fkill() {
     fi
 }
 
-# detox replacement: normalize filenames to web-safe slugs (perl/tr/sed are macOS built-ins)
+# detox replacement (old habit: `detox -rv *`): normalize filenames to web-safe
+# slugs (perl/tr/sed are macOS built-ins); recurses into directory arguments
 slug() {
-    local base name clean ext target
+    local base name clean ext target f
     for f in "$@"; do
+        if [ -d "$f" ]; then
+            slug "$f"/*(N)
+        fi
         base="${f%/*}"
         [ "$base" = "$f" ] && base="."
         name="${f##*/}"
