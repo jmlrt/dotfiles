@@ -5,6 +5,12 @@ Personal dotfiles for macOS. Files are version-controlled here and symlinked int
 ## Bootstrap a new machine
 
 ```bash
+# 0. Clone the personal repos (uv tools and agent skills live there)
+gh repo clone jmlrt/dotfiles ~/Code/dotfiles
+gh repo clone jmlrt/toolbox ~/Code/toolbox
+gh repo clone jmlrt/spotfm ~/Code/spotfm
+gh repo clone jmlrt/skills ~/Code/skills
+
 # 1. Install Homebrew (https://brew.sh), clone this repo, then packages
 #    (also installs uv tools and App Store apps via mas — sign in to the App Store first)
 brew bundle --file Brewfile
@@ -30,7 +36,8 @@ uv tool install --editable ~/Code/spotfm
 ## Notes
 
 - Window tiling and keep-awake are native: bind shortcuts to the Window > Move & Resize menu items (System Settings > Keyboard > Keyboard Shortcuts > App Shortcuts), and use the `coffee`/`decaf` aliases (caffeinate) instead of Hammerspoon.
-- `~/.personal.zsh` is sourced by `zshrc` if present; use it for untracked, per-machine shell extras. On the work machine, `~/.elastic.zsh` plays the same role.
+- `~/.personal.zsh` is sourced by `zshrc` if present; use it for untracked, per-machine shell extras. On the work machine, `~/.elastic.zsh` plays the same role. Example for the Bitwarden SSH agent: `export SSH_AUTH_SOCK="$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"`.
+- Agent skills: Mistral Vibe loads user skills from `~/.vibe/skills` and `~/.agents/skills` (the latter is also the Codex path), so symlink selected folders from `~/Code/skills` — e.g. `ln -ns ~/Code/skills/git ~/.vibe/skills/git`. Keep only the skills you use; their descriptions are always loaded, so a smaller set matches better.
 - Git commits and tags are signed by default (`config/git/config`); without step 3 the first commit will fail if gpg has no default key.
 - Migrate the GPG signing key manually (commands only here — never commit the exported key material to any repo):
 
@@ -39,6 +46,7 @@ uv tool install --editable ~/Code/spotfm
 gpg --armor --export-secret-keys <KEYID> | pbcopy
 
 # new machine: import, set ultimate trust, and point git at it
+mkdir -p ~/.gnupg && chmod 700 ~/.gnupg   # 700, not 600: without the execute bit gpg cannot read the directory
 pbpaste | gpg --import
 echo <KEYID>:6 | gpg --import-ownertrust
 git config --file ~/.config/git/config.local user.signingkey <KEYID>
