@@ -20,4 +20,5 @@ symlink gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 symlink ssh/config ~/.ssh/config
 mkdir -p ~/.ssh/sockets
 symlink config/tmux/tmux.conf ~/.config/tmux/tmux.conf
+symlink config/vscode/keybindings.json "$HOME/Library/Application Support/Code/User/keybindings.json"
 symlink zshrc ~/.zshrc

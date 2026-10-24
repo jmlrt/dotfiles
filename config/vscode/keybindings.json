@@ -1,0 +1,26 @@
+[
+  {
+    "command": "-editor.action.smartSelect.shrink",
+    "key": "cmd+ctrl+left"
+  },
+  {
+    "command": "-workbench.action.moveEditorToPreviousGroup",
+    "key": "cmd+ctrl+left"
+  },
+  {
+    "command": "-workbench.action.terminal.resizePaneLeft",
+    "key": "cmd+ctrl+left"
+  },
+  {
+    "command": "-editor.action.smartSelect.expand",
+    "key": "cmd+ctrl+right"
+  },
+  {
+    "command": "-workbench.action.moveEditorToNextGroup",
+    "key": "cmd+ctrl+right"
+  },
+  {
+    "command": "-workbench.action.terminal.resizePaneRight",
+    "key": "cmd+ctrl+right"
+  }
+]
