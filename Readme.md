@@ -6,6 +6,7 @@ Personal dotfiles for macOS. Files are version-controlled here and symlinked int
 
 ```bash
 # 1. Install Homebrew, clone this repo, then install packages
+#    (the clone uses SSH: set up your SSH agent first — see the ~/.personal.zsh note below)
 #    (brew bundle also installs uv tools and App Store apps via mas — sign in to the App Store first)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 git clone git@github.com:jmlrt/dotfiles.git ~/Code/dotfiles
