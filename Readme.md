@@ -6,7 +6,7 @@ Personal dotfiles for macOS. Files are version-controlled here and symlinked int
 
 ```bash
 # 1. Install Homebrew, clone this repo, then install packages
-#    (the clone uses SSH: set up your SSH agent first — see the ~/.personal.zsh note below)
+#    (the clone uses SSH: set up your SSH agent first, e.g. Bitwarden's — exported in ~/.personal.zsh)
 #    (brew bundle also installs uv tools and App Store apps via mas — sign in to the App Store first)
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 git clone git@github.com:jmlrt/dotfiles.git ~/Code/dotfiles
@@ -53,13 +53,10 @@ uv tool install --editable ~/Code/clipmd
 ## Notes
 
 - Window tiling and keep-awake are native (step 5 binds the Window > Move & Resize halves/quarters to the Cmd+Ctrl scheme); the `coffee`/`decaf` aliases wrap caffeinate.
-- `~/.personal.zsh` is sourced by `zshrc` if present; use it for untracked, per-machine shell extras (on the work machine, `~/.elastic.zsh` plays the same role):
+- `~/.personal.zsh` is sourced by `zshrc` if present; it holds untracked, per-machine shell extras (on the work machine, `~/.elastic.zsh` plays the same role). Keep it outside this repo — e.g. in private synced storage — and link it:
 
 ```bash
-cat > ~/.personal.zsh <<'EOF'
-# Bitwarden desktop app (App Store) ships an SSH agent; use it for git over ssh
-export SSH_AUTH_SOCK="$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"
-EOF
+ln -ns <your-synced-dotfiles>/personal.zsh ~/.personal.zsh
 ```
 - `ssh/config` includes `~/.ssh/config.local` if present (silently skipped when missing): put untracked, machine-local hosts there, the same way `~/.personal.zsh` handles shell extras.
 - Agent skills (step 6): Mistral Vibe loads them from `~/.vibe/skills` and `~/.agents/skills` (the latter is also the Codex path). Keep only the skills you use; their descriptions are always loaded, so a smaller set matches better.
