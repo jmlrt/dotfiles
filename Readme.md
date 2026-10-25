@@ -5,8 +5,9 @@ Personal dotfiles for macOS. Files are version-controlled here and symlinked int
 ## Bootstrap a new machine
 
 ```bash
-# 1. Install Homebrew (https://brew.sh), clone this repo, then packages
-#    (also installs uv tools and App Store apps via mas — sign in to the App Store first)
+# 1. Install Homebrew, clone this repo, then install packages
+#    (brew bundle also installs uv tools and App Store apps via mas — sign in to the App Store first)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 git clone git@github.com:jmlrt/dotfiles.git ~/Code/dotfiles
 brew bundle --file ~/Code/dotfiles/Brewfile
 
@@ -29,6 +30,15 @@ EOF
 
 # 5. macOS keyboard window tiling (log out/in to apply)
 ~/Code/dotfiles/scripts/macos-tiling.sh
+
+# 6. Wire the agent skills to use (selected folders only)
+mkdir -p ~/.vibe/skills
+ln -ns ~/Code/skills/<skill> ~/.vibe/skills/<skill>
+
+# 7. Activate the pre-commit hooks in every clone
+for d in ~/Code/dotfiles ~/Code/toolbox ~/Code/spotfm ~/Code/clipmd ~/Code/skills; do
+  (cd "$d" && pre-commit install)
+done
 ```
 
 `bw-backup`, `spotfm` and `clipmd` are personal tools installed from the local clones, not via `brew bundle`; they are listed in the Brewfile only so that `brew bundle check`/`cleanup` recognize them. First install:
@@ -42,9 +52,16 @@ uv tool install --editable ~/Code/clipmd
 ## Notes
 
 - Window tiling and keep-awake are native (step 5 binds the Window > Move & Resize halves/quarters to the Cmd+Ctrl scheme); the `coffee`/`decaf` aliases wrap caffeinate.
-- `~/.personal.zsh` is sourced by `zshrc` if present; use it for untracked, per-machine shell extras. On the work machine, `~/.elastic.zsh` plays the same role. Example for the Bitwarden SSH agent: `export SSH_AUTH_SOCK="$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"`.
+- `~/.personal.zsh` is sourced by `zshrc` if present; use it for untracked, per-machine shell extras (on the work machine, `~/.elastic.zsh` plays the same role):
+
+```bash
+cat > ~/.personal.zsh <<'EOF'
+# Bitwarden desktop app (App Store) ships an SSH agent; use it for git over ssh
+export SSH_AUTH_SOCK="$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"
+EOF
+```
 - `ssh/config` includes `~/.ssh/config.local` if present (silently skipped when missing): put untracked, machine-local hosts there, the same way `~/.personal.zsh` handles shell extras.
-- Agent skills: Mistral Vibe loads user skills from `~/.vibe/skills` and `~/.agents/skills` (the latter is also the Codex path), so symlink selected folders from `~/Code/skills` — e.g. `ln -ns ~/Code/skills/git ~/.vibe/skills/git`. Keep only the skills you use; their descriptions are always loaded, so a smaller set matches better.
+- Agent skills (step 6): Mistral Vibe loads them from `~/.vibe/skills` and `~/.agents/skills` (the latter is also the Codex path). Keep only the skills you use; their descriptions are always loaded, so a smaller set matches better.
 - Git commits and tags are signed by default (`config/git/config`); without step 3 the first commit will fail if gpg has no default key.
 - Migrate the GPG signing key manually (commands only here — never commit the exported key material to any repo):
 
@@ -64,4 +81,4 @@ echo test | gpg --clearsign > /dev/null && echo "signing OK"
 ```
 
   Renew before expiry (a reminder beats a surprise on the next commit): `gpg --quick-set-expire <KEYID> 2y`.
-- The repo's pre-commit hooks include `detect-private-key`, which blocks accidental commits of private key material (including OpenPGP blocks); run `pre-commit install` once per clone so they are active.
+- The pre-commit hooks activated in step 7 include `detect-private-key`, which blocks accidental commits of private key material (including OpenPGP blocks).
