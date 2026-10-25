@@ -1,1 +1,5 @@
 keybind = global:cmd+@=toggle_quick_terminal
+keybind = super+ctrl+left=unbind
+keybind = super+ctrl+right=unbind
+keybind = super+ctrl+up=unbind
+keybind = super+ctrl+down=unbind

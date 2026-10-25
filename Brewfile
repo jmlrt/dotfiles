@@ -1,5 +1,6 @@
 brew "bitwarden-cli"
 brew "colima"
+brew "coreutils" # GNU utilities; shred is required by bw-backup
 brew "direnv"
 brew "docker"
 brew "docker-compose"
