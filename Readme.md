@@ -26,6 +26,9 @@ cat > ~/.config/git/config.local <<'EOF'
 [user]
 	signingkey = <YOUR-KEY-ID>
 EOF
+
+# 5. macOS keyboard window tiling (log out/in to apply)
+~/Code/dotfiles/scripts/macos-tiling.sh
 ```
 
 `bw-backup`, `spotfm` and `clipmd` are personal tools installed from the local clones, not via `brew bundle`; they are listed in the Brewfile only so that `brew bundle check`/`cleanup` recognize them. First install:
@@ -36,11 +39,9 @@ uv tool install --editable ~/Code/spotfm
 uv tool install --editable ~/Code/clipmd
 ```
 
-`mistral-vibe` installs as a PyPI wheel; no Rust toolchain (rustup) is needed.
-
 ## Notes
 
-- Window tiling and keep-awake are native: `scripts/macos-tiling.sh` binds the Window > Move & Resize halves/quarters to the Cmd+Ctrl scheme — it writes exactly what the System Settings UI writes (idempotent on an already-configured machine), log out/in to apply. `coffee`/`decaf` (caffeinate) replace Hammerspoon's Caffeine spoon.
+- Window tiling and keep-awake are native (step 5 binds the Window > Move & Resize halves/quarters to the Cmd+Ctrl scheme); the `coffee`/`decaf` aliases wrap caffeinate.
 - `~/.personal.zsh` is sourced by `zshrc` if present; use it for untracked, per-machine shell extras. On the work machine, `~/.elastic.zsh` plays the same role. Example for the Bitwarden SSH agent: `export SSH_AUTH_SOCK="$HOME/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"`.
 - `ssh/config` includes `~/.ssh/config.local` if present (silently skipped when missing): put untracked, machine-local hosts there, the same way `~/.personal.zsh` handles shell extras.
 - Agent skills: Mistral Vibe loads user skills from `~/.vibe/skills` and `~/.agents/skills` (the latter is also the Codex path), so symlink selected folders from `~/Code/skills` — e.g. `ln -ns ~/Code/skills/git ~/.vibe/skills/git`. Keep only the skills you use; their descriptions are always loaded, so a smaller set matches better.
