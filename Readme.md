@@ -36,6 +36,8 @@ uv tool install --editable ~/Code/spotfm
 uv tool install --editable ~/Code/clipmd
 ```
 
+`mistral-vibe` installs as a PyPI wheel; no Rust toolchain (rustup) is needed.
+
 ## Notes
 
 - Window tiling and keep-awake are native: `scripts/macos-tiling.sh` binds the Window > Move & Resize halves/quarters to the Cmd+Ctrl scheme — it writes exactly what the System Settings UI writes (idempotent on an already-configured machine), log out/in to apply. `coffee`/`decaf` (caffeinate) replace Hammerspoon's Caffeine spoon.
@@ -53,7 +55,7 @@ gpg --armor --export-secret-keys <KEYID> | pbcopy
 mkdir -p ~/.gnupg && chmod 700 ~/.gnupg   # 700, not 600: without the execute bit gpg cannot read the directory
 pbpaste | gpg --import
 echo <KEYID>:6 | gpg --import-ownertrust
-git config --file ~/.config/git/config.local user.signingkey <KEYID>
+git config --file ~/.config/git/config.local user.signingkey <KEYID>   # the primary [SC] key ID — the [E] encryption subkey cannot sign
 gpgconf --kill gpg-agent   # pick up the new gpg-agent.conf / pinentry
 
 # verify, then delete the key material from wherever you staged it
