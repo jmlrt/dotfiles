@@ -35,6 +35,15 @@ zle -N down-line-or-beginning-search
 bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
 
+# Editing keys: Home/End/Delete and Ctrl/Option-arrow word jumps
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+bindkey '^[[3~' delete-char
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+bindkey '^[^[[C' forward-word
+bindkey '^[^[[D' backward-word
+
 # Prompt (current dir; set before ~/.elastic.zsh, which prepends kube-ps1)
 PROMPT='%1~ %# '
 
@@ -42,6 +51,17 @@ PROMPT='%1~ %# '
 export CLICOLOR=1
 alias grep='grep --color=auto'
 setopt auto_cd
+
+# Listing aliases (previously provided by oh-my-zsh)
+alias ll='ls -l'
+alias la='ls -la'
+alias l='ls -lah'
+
+# Up-navigation and previous-directory aliases (previously provided by oh-my-zsh)
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias -- -='cd -'
 
 # ZSH Autosuggestions
 if [ -f "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
