@@ -1,5 +1,6 @@
 brew "bitwarden-cli"
 brew "colima"
+brew "coreutils" # GNU utilities; shred is required by bw-backup
 brew "direnv"
 brew "docker"
 brew "docker-compose"
@@ -37,12 +38,17 @@ cask "spotify"
 cask "synology-drive"
 cask "visual-studio-code"
 
-uv "bw-backup" # personal tool, not on PyPI: uv tool install "git+ssh://git@github.com/jmlrt/toolbox.git#subdirectory=bw-backup"
-uv "clipmd" # personal tool kept as a local editable install: uv tool install --editable ~/Code/clipmd
+# Personal uv tools are listed bare (install commands in the comments) instead of
+# with a source: stanza: brew bundle rejects local paths by design, and its
+# `uv tool list` parser cannot read git sources back, so a sourced entry never
+# matches the installed tool. Bare entries let `brew bundle check`/`cleanup`
+# recognize the tools once installed.
+uv "bw-backup" # personal tool: uv tool install --editable ~/Code/toolbox/bw-backup
+uv "clipmd" # personal tool: uv tool install --editable ~/Code/clipmd
 uv "mistral-vibe"
 uv "pre-commit"
 uv "ruff"
-uv "spotfm" # personal tool, not on PyPI: uv tool install --editable ~/Code/spotfm
+uv "spotfm" # personal tool: uv tool install --editable ~/Code/spotfm
 
 mas "Bitwarden", id: 1352778147
 mas "Tailscale", id: 1475387142

@@ -4,6 +4,14 @@ set colorcolumn=80
 set tabstop=2 expandtab " set tab to 2 spaces
 set shiftwidth=2 " set indent to 2 spaces
 set autoread " auto reload files
+set backspace=indent,eol,start " backspace across line breaks and indent
+set splitbelow splitright " open splits below and to the right
+
+" search (also neovim defaults the shipped Vim lacks)
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
 
 " shipped Vim needs these (they are neovim defaults); Apple's system vimrc sets neither
 syntax enable
