@@ -1,4 +1,7 @@
 keybind = global:cmd+@=toggle_quick_terminal
+
+# Unbind the default keybindings for window navigation
+# to avoid conflicts with custom macos tiling shortcuts
 keybind = super+ctrl+left=unbind
 keybind = super+ctrl+right=unbind
 keybind = super+ctrl+up=unbind
