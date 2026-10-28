@@ -22,15 +22,34 @@
 
 set -euo pipefail
 
-defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add \
-  240 '{ enabled = 1; value = { parameters = (65535,123,9699328); type = standard; }; }' \
-  241 '{ enabled = 1; value = { parameters = (65535,124,9699328); type = standard; }; }' \
-  242 '{ enabled = 1; value = { parameters = (65535,126,9699328); type = standard; }; }' \
-  243 '{ enabled = 1; value = { parameters = (65535,125,9699328); type = standard; }; }' \
-  244 '{ enabled = 1; value = { parameters = (117,32,1310720); type = standard; }; }' \
-  245 '{ enabled = 1; value = { parameters = (111,31,1310720); type = standard; }; }' \
-  246 '{ enabled = 1; value = { parameters = (106,38,1310720); type = standard; }; }' \
-  247 '{ enabled = 1; value = { parameters = (108,37,1310720); type = standard; }; }'
+plist=~/Library/Preferences/com.apple.symbolichotkeys.plist
+
+# PlistBuddy writes typed integers; `defaults -dict-add` writes the parameters
+# as strings, which macOS silently ignores.
+set_key() {
+  local id=$1 ascii=$2 keycode=$3 mods=$4
+  /usr/libexec/PlistBuddy -c "Delete :AppleSymbolicHotKeys:$id" "$plist" 2>/dev/null || true
+  /usr/libexec/PlistBuddy \
+    -c "Add :AppleSymbolicHotKeys:$id dict" \
+    -c "Add :AppleSymbolicHotKeys:$id:enabled bool true" \
+    -c "Add :AppleSymbolicHotKeys:$id:value dict" \
+    -c "Add :AppleSymbolicHotKeys:$id:value:type string standard" \
+    -c "Add :AppleSymbolicHotKeys:$id:value:parameters array" \
+    -c "Add :AppleSymbolicHotKeys:$id:value:parameters: integer $ascii" \
+    -c "Add :AppleSymbolicHotKeys:$id:value:parameters: integer $keycode" \
+    -c "Add :AppleSymbolicHotKeys:$id:value:parameters: integer $mods" \
+    "$plist"
+}
+
+set_key 240 65535 123 9699328
+set_key 241 65535 124 9699328
+set_key 242 65535 126 9699328
+set_key 243 65535 125 9699328
+set_key 244 117 32 1310720
+set_key 245 111 31 1310720
+set_key 246 106 38 1310720
+set_key 247 108 37 1310720
+killall cfprefsd
 
 echo "Tiling shortcuts written. Log out and back in to apply, then verify:"
 echo "  cmd+ctrl+right / cmd+ctrl+up / cmd+ctrl+U should tile the front window."
