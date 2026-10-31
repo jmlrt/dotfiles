@@ -26,4 +26,5 @@ symlink config/vscode/keybindings.json "$HOME/Library/Application Support/Code/U
 # "always allow" approval). Re-run install.sh to restore the symlink; sync
 # any Vibe-side changes back into the repo first.
 symlink config/vibe/config.toml ~/.vibe/config.toml
+symlink config/vibe/AGENTS.md ~/.vibe/AGENTS.md
 symlink zshrc ~/.zshrc
