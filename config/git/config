@@ -66,8 +66,5 @@
   # fuzzy reset back to prior commit
   freset = !HASH=`git log --pretty=oneline | head -n 50 | fzf` && git reset --soft `echo ${HASH} | awk '{ print $1 }'`^
 
-[url "git@github.com:"]
-	insteadOf = https://github.com/
-
 [include]
   path = ~/.config/git/config.local
