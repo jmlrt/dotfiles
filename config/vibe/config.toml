@@ -85,6 +85,7 @@ allowlist = [
     "wc",
     "which",
     "whoami",
+    "yq -p toml",
     "zsh -n",
 ]
 
