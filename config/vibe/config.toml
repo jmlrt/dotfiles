@@ -1,0 +1,95 @@
+theme = "auto"
+applied_migrations = [
+    "bash_read_only_defaults_v1",
+]
+models = [
+    { thinking = "low", alias = "glm-5-3" },
+]
+active_model = ""
+
+[tools.bash]
+allowlist = [
+    "basename",
+    "bash -n",
+    "cat",
+    "cd",
+    "comm",
+    "cut",
+    "date",
+    "diff",
+    "dirname",
+    "du",
+    "echo",
+    "file",
+    "find",
+    "fmt",
+    "fold",
+    "gh auth status",
+    "git add",
+    "git blame",
+    "git branch",
+    "git check-ignore",
+    "git commit",
+    "git diff",
+    "git grep",
+    "git log",
+    "git ls-files",
+    "git ls-tree",
+    "git rev-parse",
+    "git show",
+    "git status",
+    "git tag",
+    "grep",
+    "head",
+    "join",
+    "jq",
+    "less",
+    "ls",
+    "make format",
+    "make lint",
+    "make test",
+    "md5sum",
+    "more",
+    "nl",
+    "od",
+    "paste",
+    "pwd",
+    "readlink",
+    "sha1sum",
+    "sha256sum",
+    "shasum",
+    "shellcheck",
+    "shfmt",
+    "sort",
+    "spfm spotify count-tracks",
+    "spfm spotify count-tracks-by-playlists",
+    "spfm spotify find-duplicate-ids",
+    "spfm spotify find-duplicate-names",
+    "spfm spotify find-relinked-tracks",
+    "spfm spotify find-tracks",
+    "spfm spotify list-playlists-with-track-counts",
+    "stat",
+    "sum",
+    "tac",
+    "tail",
+    "tr",
+    "tree",
+    "uname",
+    "uniq",
+    "uv run pytest",
+    "uv run ruff",
+    "uv sync",
+    "wc",
+    "which",
+    "whoami",
+    "zsh -n",
+]
+
+[tools.connector_github_app_pull_request_read]
+permission = "always"
+
+[tools.connector_github_app_update_pull_request]
+permission = "always"
+
+[tools.connector_web_search_open_url]
+permission = "always"
