@@ -19,6 +19,7 @@ brew bundle --file ~/Code/dotfiles/Brewfile
 
 # 4. Setup macOS keyboard window tiling (log out/in to apply)
 ~/Code/dotfiles/scripts/macos-tiling.sh
+# Shortcut reference: see SHORTCUTS.md
 
 # 5. Setup my personal tools
 gh auth login

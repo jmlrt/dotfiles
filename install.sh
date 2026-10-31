@@ -21,4 +21,10 @@ symlink ssh/config ~/.ssh/config
 mkdir -p ~/.ssh/sockets
 symlink config/tmux/tmux.conf ~/.config/tmux/tmux.conf
 symlink config/vscode/keybindings.json "$HOME/Library/Application Support/Code/User/keybindings.json"
+# NOTE: Vibe writes config.toml with an atomic rename, which replaces this
+# symlink with a regular file on every Vibe-side config save (including every
+# "always allow" approval). Re-run install.sh to restore the symlink; sync
+# any Vibe-side changes back into the repo first.
+symlink config/vibe/config.toml ~/.vibe/config.toml
+symlink config/vibe/AGENTS.md ~/.vibe/AGENTS.md
 symlink zshrc ~/.zshrc
