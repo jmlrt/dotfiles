@@ -21,5 +21,10 @@ symlink ssh/config ~/.ssh/config
 mkdir -p ~/.ssh/sockets
 symlink config/tmux/tmux.conf ~/.config/tmux/tmux.conf
 symlink config/vscode/keybindings.json "$HOME/Library/Application Support/Code/User/keybindings.json"
-symlink config/vibe/config.toml ~/.vibe/config.toml
+# Vibe saves its config with an atomic rename, which replaces a symlink with a
+# regular file — so this one is copied, not symlinked. To persist Vibe-side
+# changes (permissions clicked as "always allow", settings edits), copy
+# ~/.vibe/config.toml back into the repo before committing.
+mkdir -p ~/.vibe
+cp config/vibe/config.toml ~/.vibe/config.toml && echo "File $DOTFILES_HOME/config/vibe/config.toml copied to ~/.vibe/config.toml"
 symlink zshrc ~/.zshrc

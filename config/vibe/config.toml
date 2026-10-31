@@ -25,6 +25,7 @@ allowlist = [
     "fmt",
     "fold",
     "gh auth status",
+    "gh pr create",
     "git add",
     "git blame",
     "git branch",
@@ -35,9 +36,11 @@ allowlist = [
     "git log",
     "git ls-files",
     "git ls-tree",
+    "git remote get-url",
     "git rev-parse",
     "git show",
     "git status",
+    "git switch",
     "git tag",
     "grep",
     "head",
@@ -92,4 +95,7 @@ permission = "always"
 permission = "always"
 
 [tools.connector_web_search_open_url]
+permission = "always"
+
+[tools.connector_github_app_create_pull_request]
 permission = "always"
