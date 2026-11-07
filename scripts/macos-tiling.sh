@@ -8,13 +8,18 @@
 #   halves:   cmd+ctrl+left/right/up/down
 #   quarters: cmd+ctrl+U / cmd+ctrl+O (top)
 #             cmd+ctrl+J / cmd+ctrl+L (bottom)
+#   fill:     cmd+ctrl+Return (maximize, not fullscreen)
+#   center:   cmd+ctrl+C (centers, does not resize)
+#
+# IDs 237/238/240-247 are macOS Tahoe (27) Window > Move & Resize entries,
+# confirmed against the Keyboard Settings pane's DefaultShortcutsTable.xml.
 #
 # Application key handling:
 #   - Ghostty: config/ghostty/config unbinds cmd+ctrl+arrows in-app
 #   - VS Code: config/vscode/keybindings.json removes the built-ins that
 #     steal cmd+ctrl+left/right
 #
-# Undo: delete keys 240-247 from AppleSymbolicHotKeys (defaults delete ...
+# Undo: delete keys 237, 238 and 240-247 from AppleSymbolicHotKeys (defaults delete ...
 # does not work on dict entries; use PrefsEditor or re-add with enabled=0),
 # then log out/in.
 #
@@ -41,6 +46,9 @@ set_key() {
     "$plist"
 }
 
+# Return is a "special" key like the arrows: ascii 65535 and the fn modifier bit.
+set_key 237 65535 36 9699328
+set_key 238 99 8 1310720
 set_key 240 65535 123 9699328
 set_key 241 65535 124 9699328
 set_key 242 65535 126 9699328
@@ -52,4 +60,8 @@ set_key 247 108 37 1310720
 killall cfprefsd
 
 echo "Tiling shortcuts written. Log out and back in to apply, then verify:"
-echo "  cmd+ctrl+right / cmd+ctrl+up / cmd+ctrl+U should tile the front window."
+echo "  cmd+ctrl+left/right/up/down   halves"
+echo "  cmd+ctrl+U / cmd+ctrl+O       top quarters"
+echo "  cmd+ctrl+J / cmd+ctrl+L       bottom quarters"
+echo "  cmd+ctrl+Return               fill screen"
+echo "  cmd+ctrl+C                   center window"
