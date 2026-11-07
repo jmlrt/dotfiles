@@ -29,6 +29,10 @@ Whenever an "always allow" approval or any other change writes to
 The same care applies to other symlinked dotfiles: edit the file in the
 repo, never replace the symlink with a regular file.
 
+> Upstream tracking: Vibe may switch to a symlink-safe config write —
+> [mistralai/mistral-vibe#1385](https://github.com/mistralai/mistral-vibe/issues/1385).
+> Once that is fixed, remove this workaround section from the dotfiles.
+
 ## Formatters: allow reformatting only, never content changes
 
 - `shfmt` may run freely (with or without `-w`): it is a pure formatter and

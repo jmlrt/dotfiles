@@ -26,6 +26,7 @@ allowlist = [
     "fold",
     "gh auth status",
     "gh pr create",
+    "gh pr view",
     "git add",
     "git blame",
     "git branch",
