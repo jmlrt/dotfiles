@@ -4,8 +4,10 @@ applied_migrations = [
 ]
 models = [
     { thinking = "low", alias = "glm-5-3" },
+    { thinking = "medium", alias = "mistral-large-4-0-3" },
 ]
 active_model = ""
+voice_mode_enabled = true
 
 [tools.bash]
 allowlist = [

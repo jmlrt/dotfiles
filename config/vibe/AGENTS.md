@@ -1,37 +1,35 @@
 # Global agent instructions
 
-## Dotfiles are symlinks — keep them intact
+## Machine profile
 
-Most of my home-directory configs are symlinks into `~/Code/dotfiles`
-(`install.sh` there is the source of truth for the mapping), including:
+- Apple Silicon macOS; Homebrew is at `/opt/homebrew` (Intel paths unsupported).
+- Prefer OS-shipped tools over brew duplicates (macOS ships `jq`).
 
-- `~/.vibe/config.toml` -> `~/Code/dotfiles/config/vibe/config.toml`
+## Per-machine files vs public repos
 
-Vibe saves its config with an atomic write (temp file + rename), so **any
-Vibe-side config write replaces the symlink with a regular file**. This
-happens silently on every "always allow" approval (which appends to
-`[tools.bash]` allowlist or tool `permission` entries), and on settings
-changes made via `/config`.
+- Machine-specific tweaks go in untracked local files (`~/.personal.zsh`,
+  `~/.config/git/config.local`), never in public repos.
+- This dotfiles repo is public: never commit secrets (GPG key material,
+  exported keys, tokens).
 
-### Required behavior
+## GitHub: connector vs `gh` CLI
 
-Whenever an "always allow" approval or any other change writes to
-`~/.vibe/config.toml`:
-
-1. Warn me that the symlink was (or will be) replaced by a regular file.
-2. Suggest integrating the change into the dotfiles repo: copy the new
-   content into `~/Code/dotfiles/config/vibe/config.toml`, then re-create
-   the symlink (`ln -nsf ~/Code/dotfiles/config/vibe/config.toml
-   ~/.vibe/config.toml`, or re-run `~/Code/dotfiles/install.sh`).
-3. Do this before I commit anything else, so the repo and live config do not
-   silently diverge.
-
-The same care applies to other symlinked dotfiles: edit the file in the
-repo, never replace the symlink with a regular file.
-
-> Upstream tracking: Vibe may switch to a symlink-safe config write —
-> [mistralai/mistral-vibe#1385](https://github.com/mistralai/mistral-vibe/issues/1385).
-> Once that is fixed, remove this workaround section from the dotfiles.
+- Use the `connector_github_app` tools for reads where the full structured
+  object is useful: issue threads with comments, PR details/diff/reviews,
+  semantic issue search. Connector schemas load lazily via
+  `search_tool_functions`, so a connector you never call costs no context.
+- Use `gh` for anything that mutates (create/update PRs, issues, comments):
+  the GitHub App token is read-only for pull requests (403 on
+  `create_pull_request`); `gh` authenticates with your own keychain token.
+  `gh auth status`, `gh pr create`, `gh pr view` are allowlisted.
+- When only a few fields of a large object are needed (release notes, issue
+  state, PR status), prefer `gh api ... -q '<jq>'` or `gh ... --json FIELDS
+  --jq ...` over the connector: connector results land in the conversation
+  verbatim (a full release object is ~20k chars) and persist for the rest
+  of the session, while `gh -q` returns only the selected fields.
+- Rule of thumb: connector = full-payload reads; `gh` + `jq` = selective
+  reads and all writes. Check `/context` if the tools/conversation share
+  grows.
 
 ## Formatters: allow reformatting only, never content changes
 
