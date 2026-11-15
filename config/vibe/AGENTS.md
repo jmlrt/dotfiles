@@ -7,31 +7,12 @@ Most of my home-directory configs are symlinks into `~/Code/dotfiles`
 
 - `~/.vibe/config.toml` -> `~/Code/dotfiles/config/vibe/config.toml`
 
-Vibe saves its config with an atomic write (temp file + rename), so **any
-Vibe-side config write replaces the symlink with a regular file**. This
-happens silently on every "always allow" approval (which appends to
-`[tools.bash]` allowlist or tool `permission` entries), and on settings
-changes made via `/config`.
-
-### Required behavior
-
-Whenever an "always allow" approval or any other change writes to
-`~/.vibe/config.toml`:
-
-1. Warn me that the symlink was (or will be) replaced by a regular file.
-2. Suggest integrating the change into the dotfiles repo: copy the new
-   content into `~/Code/dotfiles/config/vibe/config.toml`, then re-create
-   the symlink (`ln -nsf ~/Code/dotfiles/config/vibe/config.toml
-   ~/.vibe/config.toml`, or re-run `~/Code/dotfiles/install.sh`).
-3. Do this before I commit anything else, so the repo and live config do not
-   silently diverge.
-
-The same care applies to other symlinked dotfiles: edit the file in the
-repo, never replace the symlink with a regular file.
-
-> Upstream tracking: Vibe may switch to a symlink-safe config write —
-> [mistralai/mistral-vibe#1385](https://github.com/mistralai/mistral-vibe/issues/1385).
-> Once that is fixed, remove this workaround section from the dotfiles.
+Vibe writes its config symlink-safely now that
+[mistralai/mistral-vibe#1385](https://github.com/mistralai/mistral-vibe/issues/1385)
+is fixed (verified on v3.1.2: `~/.vibe/config.toml` stays a symlink and
+writes land in the repo file). The same care applies to all symlinked
+dotfiles: edit the file in the repo, never replace the symlink with a
+regular file.
 
 ## Formatters: allow reformatting only, never content changes
 
