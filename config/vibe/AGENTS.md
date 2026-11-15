@@ -14,6 +14,25 @@ writes land in the repo file). The same care applies to all symlinked
 dotfiles: edit the file in the repo, never replace the symlink with a
 regular file.
 
+## GitHub: connector vs `gh` CLI
+
+- Use the `connector_github_app` tools for reads where the full structured
+  object is useful: issue threads with comments, PR details/diff/reviews,
+  semantic issue search. Connector schemas load lazily via
+  `search_tool_functions`, so a connector you never call costs no context.
+- Use `gh` for anything that mutates (create/update PRs, issues, comments):
+  the GitHub App token is read-only for pull requests (403 on
+  `create_pull_request`); `gh` authenticates with your own keychain token.
+  `gh auth status`, `gh pr create`, `gh pr view` are allowlisted.
+- When only a few fields of a large object are needed (release notes, issue
+  state, PR status), prefer `gh api ... -q '<jq>'` or `gh ... --json FIELDS
+  --jq ...` over the connector: connector results land in the conversation
+  verbatim (a full release object is ~20k chars) and persist for the rest
+  of the session, while `gh -q` returns only the selected fields.
+- Rule of thumb: connector = full-payload reads; `gh` + `jq` = selective
+  reads and all writes. Check `/context` if the tools/conversation share
+  grows.
+
 ## Formatters: allow reformatting only, never content changes
 
 - `shfmt` may run freely (with or without `-w`): it is a pure formatter and
