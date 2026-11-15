@@ -1,5 +1,17 @@
 # Global agent instructions
 
+## Machine profile
+
+- Apple Silicon macOS; Homebrew is at `/opt/homebrew` (Intel paths unsupported).
+- Prefer OS-shipped tools over brew duplicates (macOS ships `jq`).
+
+## Per-machine files vs public repos
+
+- Machine-specific tweaks go in untracked local files (`~/.personal.zsh`,
+  `~/.elastic.zsh`, `~/.config/git/config.local`), never in public repos.
+- This dotfiles repo is public: never commit secrets (GPG key material,
+  exported keys, tokens).
+
 ## GitHub: connector vs `gh` CLI
 
 - Use the `connector_github_app` tools for reads where the full structured
