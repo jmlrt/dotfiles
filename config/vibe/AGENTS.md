@@ -1,19 +1,5 @@
 # Global agent instructions
 
-## Dotfiles are symlinks — keep them intact
-
-Most of my home-directory configs are symlinks into `~/Code/dotfiles`
-(`install.sh` there is the source of truth for the mapping), including:
-
-- `~/.vibe/config.toml` -> `~/Code/dotfiles/config/vibe/config.toml`
-
-Vibe writes its config symlink-safely now that
-[mistralai/mistral-vibe#1385](https://github.com/mistralai/mistral-vibe/issues/1385)
-is fixed (verified on v3.1.2: `~/.vibe/config.toml` stays a symlink and
-writes land in the repo file). The same care applies to all symlinked
-dotfiles: edit the file in the repo, never replace the symlink with a
-regular file.
-
 ## GitHub: connector vs `gh` CLI
 
 - Use the `connector_github_app` tools for reads where the full structured

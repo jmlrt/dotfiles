@@ -10,6 +10,7 @@
 
 - `install.sh` creates the symlinks into `~` and is the source of truth for the file mapping. It force-replaces destinations (`ln -nsf`), including regular files in the way.
 - Configs are symlinked, so edits take effect immediately — do not re-run `install.sh` to apply a change.
+- Edit symlinked files in the repo, never replace the symlink with a regular file.
 
 ## Where things go
 
