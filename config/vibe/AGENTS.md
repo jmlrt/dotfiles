@@ -8,7 +8,7 @@
 ## Per-machine files vs public repos
 
 - Machine-specific tweaks go in untracked local files (`~/.personal.zsh`,
-  `~/.elastic.zsh`, `~/.config/git/config.local`), never in public repos.
+  `~/.config/git/config.local`), never in public repos.
 - This dotfiles repo is public: never commit secrets (GPG key material,
   exported keys, tokens).
 
